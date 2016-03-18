@@ -21,6 +21,15 @@ def init_decks(player):
     player['discard'] = []
     player['active'] = []
 
+def draw_cards(player):
+    for x in range(0, player['handsize']):
+        if (len(player['deck']) == 0):
+            random.shuffle(player['discard'])
+            player['deck'] = player['discard']
+            player['discard'] = []
+        card = player['deck'].pop()
+        player['hand'].append(card)
+
 
 if __name__ == '__main__':
     pO = {'name': 'player one', 'health': 30, 'deck': None, 'hand': None, 'active': None, 'handsize': 5,
@@ -48,21 +57,9 @@ if __name__ == '__main__':
         central['active'].append(card)
         count = count + 1
 
-    for x in range(0, pO['handsize']):
-        if (len(pO['deck']) == 0):
-            random.shuffle(pO['discard'])
-            pO['deck'] = pO['discard']
-            pO['discard'] = []
-        card = pO['deck'].pop()
-        pO['hand'].append(card)
+    draw_cards(pO)
+    draw_cards(pC)
 
-    for x in range(0, pO['handsize']):
-        if len(pC['deck']) == 0:
-            random.shuffle(pO['discard'])
-            pC['deck'] = pC['discard']
-            pC['discard'] = []
-        card = pC['deck'].pop()
-        pC['hand'].append(card)
 
     print "Available Cards"
     for card in central['active']:
