@@ -13,6 +13,14 @@ class Card(object):
     def get_money(self):
             return self.values[1]
 
+def init_decks(player):
+    init_cards = [8 * [Card('Serf', (0, 1), 0)], 2 * [Card('Squire', (1, 0), 0)]]
+    pod = list(itertools.chain.from_iterable(init_cards))
+    player['deck'] = pod
+    player['hand'] = []
+    player['discard'] = []
+    player['active'] = []
+
 
 if __name__ == '__main__':
     pO = {'name': 'player one', 'health': 30, 'deck': None, 'hand': None, 'active': None, 'handsize': 5,
@@ -21,23 +29,10 @@ if __name__ == '__main__':
                'discard': None}
     central = {'name': 'central', 'active': None, 'activeSize': 5, 'supplement': None, 'deck': None}
     sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
-    playeronedeck = [8 * [Card('Serf', (0, 1), 0)],
-                     2 * [Card('Squire', (1, 0), 0)]
-                     ]
-    pod = list(itertools.chain.from_iterable(playeronedeck))
-    pO['deck'] = pod
-    pO['hand'] = []
-    pO['discard'] = []
-    pO['active'] = []
-    playertwodeck = [
-            8 * [Card('Serf', (0, 1), 0)],
-        2 * [Card('Squire', (1, 0), 0)]
-    ]
-    ptd = list(itertools.chain.from_iterable(playertwodeck))
-    pC['deck'] = ptd
-    pC['hand'] = []
-    pC['discard'] = []
-    pC['active'] = []
+
+    init_decks(pO)
+    init_decks(pC)
+
 
     supplement = 10 * [Card('Levy', (1, 2), 2)]
     deck = list(itertools.chain.from_iterable(sdc))
