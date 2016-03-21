@@ -88,12 +88,12 @@ if __name__ == '__main__':
     init_new_game()
 
     pG = raw_input('Do you want to play a game?:')
-    play_game = (pG=='Y' or 'y')
+    play_game = (pG== 'Y' or pG == 'y')
     while play_game:
         draw_cards(player_human)
         draw_cards(player_computer)
         oT = raw_input("Do you want an aggressive (A) opponent or an acquisative (Q) opponent")
-        aggressive = (oT=='A' or 'a')
+        aggressive = (oT=='A' or oT == 'a')
         continue_game = True
         while continue_game:
             money = 0
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
                 act = raw_input("Enter Action: ")
                 print act
-                if act == 'P':
+                if act == 'P' or act == 'p':
                     if(len(player_human['hand'])>0):
                         for x in range(0, len(player_human['hand'])):
                             card = player_human['hand'].pop()
@@ -150,7 +150,7 @@ if __name__ == '__main__':
                         print card
                     print "\nYour Values"
                     print "Money %s, Attack %s" % (money, attack)
-                if (act == 'B'):
+                if (act == 'B' or act == 'b'):
 
                     notending = True
                     while money > 0:
@@ -161,7 +161,7 @@ if __name__ == '__main__':
                             ind = ind + 1
                         print "Choose a card to buy [0-n], S for supplement, E to end buying"
                         bv = raw_input("Choose option: ")
-                        if bv == 'S':
+                        if bv == 'S' or bv == 's':
                             if len(central['supplement']) > 0:
                                 if money >= central['supplement'][0].cost:
                                     money = money - central['supplement'][0].cost
@@ -171,7 +171,7 @@ if __name__ == '__main__':
                                     print "insufficient money to buy"
                             else:
                                 print "no supplements left"
-                        elif bv == 'E':
+                        elif bv == 'E' or bv == 'e':
                             notending = False
                             break;
                         elif bv.isdigit():
@@ -193,10 +193,10 @@ if __name__ == '__main__':
                             print "Enter a valid option"
 
 
-                if act == 'A':
+                if act == 'A' or act == 'a':
                     player_computer['health'] = player_computer['health'] - attack
                     attack = 0
-                if act == 'E':
+                if act == 'E'  or act == 'e':
                     if (len(player_human['hand']) >0 ):
                         for x in range(0, len(player_human['hand'])):
                             player_human['discard'].append(player_human['hand'].pop())
@@ -336,6 +336,6 @@ if __name__ == '__main__':
         print "\n\n==============================================\n\n"
         init_new_game()
         pG = raw_input("\nDo you want to play another game?:")
-        play_game = (pG=='Y' or 'y')
+        play_game = (pG== 'Y' or pG == 'y')
 
     exit()
