@@ -74,6 +74,25 @@ def init_new_game():
     print "Supplement"
     print central['supplement'][0]
 
+def input_check(input_value, check_type):
+    if(len(input_value) != 1):
+        print "Invalid Input, please input one character at a time!"
+        return 1
+    else:
+        if(check_type == 1):
+            if(input_value not in ['Y','y','N','n']):
+                print "Invalid Input, please enter 'Y' or 'N' !"
+                return 1
+            else:
+                return 0
+        elif(check_type == 2):
+            if(input_value not in ['A','a','Q','q']):
+                print "Invalid Input, please enter 'A' or 'Q' !"
+                return 1
+            else:
+                return 0
+
+
 # Card list should be constant and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
 supplement = 10 * [Card('Levy', (1, 2), 2)]
@@ -86,13 +105,16 @@ if __name__ == '__main__':
     central = {}
 
     init_new_game()
-
     pG = raw_input('Do you want to play a game?:')
+    while (input_check(pG,1)):
+        pG = raw_input('Do you want to play a game?:')
     play_game = (pG== 'Y' or pG == 'y')
     while play_game:
         draw_cards(player_human)
         draw_cards(player_computer)
         oT = raw_input("Do you want an aggressive (A) opponent or an acquisative (Q) opponent")
+        while (input_check(oT,2)):
+            oT = raw_input("Do you want an aggressive (A) opponent or an acquisative (Q) opponent")
         aggressive = (oT=='A' or oT == 'a')
         continue_game = True
         while continue_game:
@@ -336,6 +358,8 @@ if __name__ == '__main__':
         print "\n\n==============================================\n\n"
         init_new_game()
         pG = raw_input("\nDo you want to play another game?:")
+        while (input_check(pG,1)):
+            pG = raw_input('Do you want to play a game?:')
         play_game = (pG== 'Y' or pG == 'y')
 
     exit()
