@@ -76,25 +76,34 @@ def init_new_game():
 
 def input_check(input_value, check_type):
     if(len(input_value) != 1):
-        print "Invalid Input, please input one character at a time!"
+        print "Invalid Input, please input one character at a time!\n"
         return 1
     else:
         if(check_type == 1):
-            if(input_value not in ['Y','y','N','n']):
-                print "Invalid Input, please enter 'Y' or 'N' !"
+            if(input_value not in ['Y', 'y', 'N', 'n']):
+                print "Invalid Input, please enter 'Y' or 'N' !\n"
                 return 1
             else:
                 return 0
         elif(check_type == 2):
-            if(input_value not in ['A','a','Q','q']):
-                print "Invalid Input, please enter 'A' or 'Q' !"
+            if(input_value not in ['A', 'a', 'Q', 'q']):
+                print "Invalid Input, please enter 'A' or 'Q' !\n"
                 return 1
             else:
                 return 0
-
+        elif(check_type == 3):
+            if(input_value not in ['P', 'p', 'B', 'b', 'A', 'a', 'E', 'e'] \
+                or input_value.isdigit() == False):
+                print "Invalid action, please follow the instruction\n"
+                return 1
 
 # Card list should be constant and can be modified here
-sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
+           3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)], \
+           3 * [Card('Tailor', (0, 4), 3)], 3 * [Card('Crossbowman', (4, 0), 3)], \
+           3 * [Card('Merchant', (0, 5), 4)], 4 * [Card('Thug', (2, 0), 1)], \
+           4 * [Card('Thief', (1, 1), 1)], 2 * [Card('Catapault', (7, 0), 6)], \
+           2 * [Card('Caravan', (1, 5), 5)], 2 * [Card('Assassin', (5, 0), 4)]]
 supplement = 10 * [Card('Levy', (1, 2), 2)]
 
 if __name__ == '__main__':
@@ -105,17 +114,17 @@ if __name__ == '__main__':
     central = {}
 
     init_new_game()
-    pG = raw_input('Do you want to play a game?:')
-    while (input_check(pG,1)):
-        pG = raw_input('Do you want to play a game?:')
-    play_game = (pG== 'Y' or pG == 'y')
+    pG = raw_input('Do you want to play a game?\nY = Yes , N = No: ')
+    while (input_check(pG, 1)):
+        pG = raw_input('Do you want to play a game?\nY = Yes , N = No: ')
+    play_game = (pG == 'Y' or pG == 'y')
     while play_game:
         draw_cards(player_human)
         draw_cards(player_computer)
-        oT = raw_input("Do you want an aggressive (A) opponent or an acquisative (Q) opponent")
-        while (input_check(oT,2)):
-            oT = raw_input("Do you want an aggressive (A) opponent or an acquisative (Q) opponent")
-        aggressive = (oT=='A' or oT == 'a')
+        oT = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
+        while (input_check(oT, 2)):
+            oT = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
+        aggressive = (oT == 'A' or oT == 'a')
         continue_game = True
         while continue_game:
             money = 0
@@ -124,6 +133,7 @@ if __name__ == '__main__':
 
                 print "\nPlayer Health %s" % player_human['health']
                 print "Computer Health %s" % player_computer['health']
+
 
                 print "\nYour Hand"
                 index = 0
@@ -135,6 +145,9 @@ if __name__ == '__main__':
                 print "\nChoose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
 
                 act = raw_input("Enter Action: ")
+                while(input_check(act, 3)):
+                    print "Choose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)\n"
+                    act = raw_input("Enter Action: ")
                 print act
                 if act == 'P' or act == 'p':
                     if(len(player_human['hand'])>0):
