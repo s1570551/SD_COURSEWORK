@@ -88,12 +88,12 @@ if __name__ == '__main__':
     init_new_game()
 
     pG = raw_input('Do you want to play a game?:')
-    play_game = (pG=='Y')
+    play_game = (pG=='Y' or 'y')
     while play_game:
         draw_cards(player_human)
         draw_cards(player_computer)
         oT = raw_input("Do you want an aggressive (A) opponent or an acquisative (Q) opponent")
-        aggressive = (oT=='A')
+        aggressive = (oT=='A' or 'a')
         continue_game = True
         while continue_game:
             money = 0
@@ -135,10 +135,10 @@ if __name__ == '__main__':
                     print "Money %s, Attack %s" % (money, attack)
                 if act.isdigit():
                     if( int(act) < len(player_human['hand'])):
-                        player_human['active'].append(player_human['hand'].pop(int(act)))
-                        for card in player_human['active']:
-                            money = money + card.get_money()
-                            attack = attack + card.get_attack()
+                        out_card = player_human['hand'].pop(int(act))
+                        player_human['active'].append(out_card)
+                        money = money + out_card.get_money()
+                        attack = attack + out_card.get_attack()
                     print "\nYour Hand"
                     index = 0
                     for card in player_human['hand']:
@@ -336,6 +336,6 @@ if __name__ == '__main__':
         print "\n\n==============================================\n\n"
         init_new_game()
         pG = raw_input("\nDo you want to play another game?:")
-        play_game = (pG=='Y')
+        play_game = (pG=='Y' or 'y')
 
     exit()
