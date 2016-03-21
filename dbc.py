@@ -110,6 +110,9 @@ def display_main_information(player1,player2):
     for card in player1['hand']:
         print "[%s] %s " % (index, card)
         index = index + 1
+
+    print "\nYour Active Cards"
+    show_cards(player_human['active'])
     print "\nYour money %s \nYour attack %s\n" % (player1['money'], player1['attack'])
     print "\nChoose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)\n"
 
@@ -162,41 +165,22 @@ if __name__ == '__main__':
                         for x in range(0, len(player_human['hand'])):
                             card = player_human['hand'].pop()
                             player_human['active'].append(card)
-                            money = money + card.get_money()
-                            attack = attack + card.get_attack()
+                            player_human['money'] = player_human['money'] + card.get_money()
+                            player_human['attack'] = player_human['attack'] + card.get_attack()
 
-                    print "\nYour Hand"
-                    index = 0
-                    for card in player_human['hand']:
-                        print "[%s] %s" % (index, card)
-                        index = index + 1
-
-                    print "\nYour Active Cards"
-                    for card in player_human['active']:
-                        print card
-                    print "\nYour Values"
-                    print "Money %s, Attack %s" % (money, attack)
                 if act.isdigit():
                     if( int(act) < len(player_human['hand'])):
                         out_card = player_human['hand'].pop(int(act))
                         player_human['active'].append(out_card)
-                        money = money + out_card.get_money()
-                        attack = attack + out_card.get_attack()
-                    print "\nYour Hand"
-                    index = 0
-                    for card in player_human['hand']:
-                        print "[%s] %s" % (index, card)
-                        index = index + 1
+                        player_human['money'] = player_human['money'] + out_card.get_money()
+                        player_human['attack'] = player_human['attack'] + out_card.get_attack()
 
-                    print "\nYour Active Cards"
-                    for card in player_human['active']:
-                        print card
-                    print "\nYour Values"
-                    print "Money %s, Attack %s" % (money, attack)
+                    #print "\nYour Values"
+                    #print "Money %s, Attack %s" % (player_human['money'], player_human['attack'])
                 if (act == 'B' or act == 'b'):
 
                     notending = True
-                    while money > 0:
+                    while player_human['money'] > 0:
                         print "Available Cards"
                         ind = 0
                         for card in central['active']:
@@ -206,8 +190,8 @@ if __name__ == '__main__':
                         bv = raw_input("Choose option: ")
                         if bv == 'S' or bv == 's':
                             if len(central['supplement']) > 0:
-                                if money >= central['supplement'][0].cost:
-                                    money = money - central['supplement'][0].cost
+                                if player_human['money'] >= central['supplement'][0].cost:
+                                    player_human['money'] = player_human['money'] - central['supplement'][0].cost
                                     player_human['discard'].append(central['supplement'].pop())
                                     print "Supplement Bought"
                                 else:
@@ -219,8 +203,8 @@ if __name__ == '__main__':
                             break;
                         elif bv.isdigit():
                             if int(bv) < len(central['active']):
-                                 if money >= central['active'][int(bv)].cost:
-                                    money = money - central['active'][int(bv)].cost
+                                 if player_human['money'] >= central['active'][int(bv)].cost:
+                                    player_human['money'] = player_human['money'] - central['active'][int(bv)].cost
                                     player_human['discard'].append(central['active'].pop(int(bv)))
                                     if( len(central['deck']) > 0):
                                         card = central['deck'].pop()
@@ -237,9 +221,11 @@ if __name__ == '__main__':
 
 
                 if act == 'A' or act == 'a':
-                    player_computer['health'] = player_computer['health'] - attack
-                    attack = 0
+                    player_computer['health'] = player_computer['health'] - player_human['attack']
+                    player_human['attack'] = 0
                 if act == 'E'  or act == 'e':
+                    player_human['money'] = 0
+                    player_human['attack'] = 0
                     if (len(player_human['hand']) >0 ):
                         for x in range(0, len(player_human['hand'])):
                             player_human['discard'].append(player_human['hand'].pop())
@@ -269,28 +255,28 @@ if __name__ == '__main__':
             for x in range(0, len(player_computer['hand'])):
                             card = player_computer['hand'].pop()
                             player_computer['active'].append(card)
-                            money = money + card.get_money()
-                            attack = attack + card.get_attack()
+                            player_computer['money']  = player_computer['money'] + card.get_money()
+                            player_computer['attack'] = player_computer['attack'] + card.get_attack()
 
-            print " Computer player values attack %s, money %s" % (attack, money)
-            print " Computer attacking with strength %s" % attack
-            player_human['health'] = player_human['health'] - attack
+            print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
+            print " Computer attacking with strength %s" % player_computer['attack']
+            player_human['health'] = player_human['health'] - player_computer['attack']
             attack = 0
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
-            print " Computer player values attack %s, money %s" % (attack, money)
+            print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print "Computer buying"
             if money > 0:
                 cb = True
                 templist = []
-                print "Starting Money %s and cb %s " % (money, cb)
+                print "Starting Money %s and cb %s " % (player_computer['money'], cb)
                 while cb:
                     templist = []
                     if len(central['supplement']) > 0:
-                        if central['supplement'][0].cost <= money:
+                        if central['supplement'][0].cost <= player_computer['money']:
                             templist.append(("S", central['supplement'][0]))
                     for intindex in range (0, central['activeSize']):
-                        if central['active'][intindex].cost <= money:
+                        if central['active'][intindex].cost <= player_computer['money']:
                             templist.append((intindex, central['active'][intindex]))
                     if len(templist) >0:
                         highestIndex = 0
@@ -307,7 +293,7 @@ if __name__ == '__main__':
                         source = templist[highestIndex][0]
                         if source in range(0,5):
                             if money >= central['active'][int(source)].cost:
-                                money = money - central['active'][int(source)].cost
+                                player_computer['money'] = player_computer['money'] - central['active'][int(source)].cost
                                 card = central['active'].pop(int(source))
                                 print "Card bought %s" % card
                                 player_computer['discard'].append(card)
@@ -319,8 +305,8 @@ if __name__ == '__main__':
                             else:
                                 print "Error Occurred"
                         else:
-                            if money >= central['supplement'][0].cost:
-                                money = money - central['supplement'][0].cost
+                            if player_computer['money'] >= central['supplement'][0].cost:
+                                player_computer['money'] = player_computer['money'] - central['supplement'][0].cost
                                 card = central['supplement'].pop()
                                 player_computer['discard'].append(card)
                                 print "Supplement Bought %s" % card
@@ -328,7 +314,7 @@ if __name__ == '__main__':
                                 print "Error Occurred"
                     else:
                         cb = False
-                    if money == 0:
+                    if player_computer['money'] == 0:
                         cb = False
             else:
                 print "No Money to buy anything"
@@ -339,7 +325,8 @@ if __name__ == '__main__':
             if (len(player_computer['active']) >0 ):
                 for x in range(0, len(player_computer['active'])):
                     player_computer['discard'].append(player_computer['active'].pop())
-
+            player_computer['attack'] = 0
+            player_computer['money'] = 0
             draw_cards(player_computer)
             print "\n*****Computer's turn finished*****"
             print "\n\n==============================================\n\n"
