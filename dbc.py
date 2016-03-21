@@ -292,7 +292,7 @@ if __name__ == '__main__':
                                         highestIndex = intindex
                         source = templist[highestIndex][0]
                         if source in range(0,5):
-                            if money >= central['active'][int(source)].cost:
+                            if player_computer['money'] >= central['active'][int(source)].cost:
                                 player_computer['money'] = player_computer['money'] - central['active'][int(source)].cost
                                 card = central['active'].pop(int(source))
                                 print "Card bought %s" % card
