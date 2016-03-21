@@ -40,6 +40,8 @@ def init_player_info(player):
     player['hand'] = None
     player['active'] = None
     player['discard'] = None
+    player['money'] = 0
+    player['attack'] = 0
 
 # This function is used to initialize central deck
 def init_central_deck(central_deck):
@@ -93,9 +95,24 @@ def input_check(input_value, check_type):
                 return 0
         elif(check_type == 3):
             if(input_value not in ['P', 'p', 'B', 'b', 'A', 'a', 'E', 'e'] \
-                or input_value.isdigit() == False):
+                and input_value.isdigit() == False):
                 print "Invalid action, please follow the instruction\n"
                 return 1
+            else:
+                return 0
+
+def display_main_information(player1,player2):
+
+    print "Player Health %s" % player1['health']
+    print "Computer Health %s" % player2['health']
+    print "\nYour Hand:"
+    index = 0
+    for card in player1['hand']:
+        print "[%s] %s " % (index, card)
+        index = index + 1
+    print "\nYour money %s \nYour attack %s\n" % (player1['money'], player1['attack'])
+    print "\nChoose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)\n"
+
 
 # Card list should be constant and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
@@ -126,29 +143,20 @@ if __name__ == '__main__':
             oT = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
         aggressive = (oT == 'A' or oT == 'a')
         continue_game = True
+        print "\n\n==============================================\n\n"
+        print "Game starts!!!\n"
+
         while continue_game:
-            money = 0
-            attack = 0
+            money = player_human['money']
+            attack = player_human['attack']
             while True:
 
-                print "\nPlayer Health %s" % player_human['health']
-                print "Computer Health %s" % player_computer['health']
-
-
-                print "\nYour Hand"
-                index = 0
-                for card in player_human['hand']:
-                        print "[%s] %s" % (index, card)
-                        index = index + 1
-                print "\nYour Values"
-                print "Money %s, Attack %s" % (money, attack)
-                print "\nChoose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
+                display_main_information(player_human, player_computer)
 
                 act = raw_input("Enter Action: ")
                 while(input_check(act, 3)):
                     print "Choose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)\n"
                     act = raw_input("Enter Action: ")
-                print act
                 if act == 'P' or act == 'p':
                     if(len(player_human['hand'])>0):
                         for x in range(0, len(player_human['hand'])):
@@ -242,6 +250,7 @@ if __name__ == '__main__':
                             player_human['discard'].append(player_human['active'].pop())
 
                     draw_cards(player_human)
+                    print "\n*****Computer's turn started*****\n"
                     break
 
             print "Available Cards"
@@ -255,8 +264,8 @@ if __name__ == '__main__':
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
 
-            money = 0
-            attack = 0
+            money = player_computer['money']
+            attack = player_computer['attack']
             for x in range(0, len(player_computer['hand'])):
                             card = player_computer['hand'].pop()
                             player_computer['active'].append(card)
@@ -332,8 +341,8 @@ if __name__ == '__main__':
                     player_computer['discard'].append(player_computer['active'].pop())
 
             draw_cards(player_computer)
-            print "Computer turn ending"
-
+            print "\n*****Computer's turn finished*****"
+            print "\n\n==============================================\n\n"
 
             print "Available Cards"
             for card in central['active']:
@@ -342,9 +351,10 @@ if __name__ == '__main__':
             print "Supplement"
             if len(central['supplement']) > 0:
                 print central['supplement'][0]
+                print "\n"
 
-            print "\nPlayer Health %s" % player_human['health']
-            print "Computer Health %s" % player_computer['health']
+            #print "\nPlayer Health %s" % player_human['health']
+            #print "Computer Health %s" % player_computer['health']
 
             if player_human['health'] <= 0:
                 continue_game = False
