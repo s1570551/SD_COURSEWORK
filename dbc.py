@@ -74,18 +74,18 @@ def init_new_game():
     print "Supplement"
     print central['supplement'][0]
 
+# Card list should be constant and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
 supplement = 10 * [Card('Levy', (1, 2), 2)]
 
 if __name__ == '__main__':
 
+    # Declare dictionaries
     player_human = {'name':'player human'}
     player_computer = {'name':'player computer'}
     central = {}
 
     init_new_game()
-
-
 
     pG = raw_input('Do you want to play a game?:')
     play_game = (pG=='Y')
@@ -205,13 +205,8 @@ if __name__ == '__main__':
                     if (len(player_human['active']) >0 ):
                         for x in range(0, len(player_human['active'])):
                             player_human['discard'].append(player_human['active'].pop())
-                    for x in range(0, player_human['handsize']):
-                        if len(player_human['deck']) == 0:
-                            random.shuffle(player_human['discard'])
-                            player_human['deck'] = player_human['discard']
-                            player_human['discard'] = []
-                        card = player_human['deck'].pop()
-                        player_human['hand'].append(card)
+
+                    draw_cards(player_human)
                     break
 
             print "Available Cards"
@@ -300,13 +295,8 @@ if __name__ == '__main__':
             if (len(player_computer['active']) >0 ):
                 for x in range(0, len(player_computer['active'])):
                     player_computer['discard'].append(player_computer['active'].pop())
-            for x in range(0, player_computer['handsize']):
-                        if len(player_computer['deck']) == 0:
-                            random.shuffle(player_computer['discard'])
-                            player_computer['deck'] = player_computer['discard']
-                            player_computer['discard'] = []
-                        card = player_computer['deck'].pop()
-                        player_computer['hand'].append(card)
+
+            draw_cards(player_computer)
             print "Computer turn ending"
 
 
