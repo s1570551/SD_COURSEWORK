@@ -266,7 +266,7 @@ if __name__ == '__main__':
             print "Computer Health %s" % player_computer['health']
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print "Computer buying"
-            if money > 0:
+            if player_computer['money'] > 0:
                 cb = True
                 templist = []
                 print "Starting Money %s and cb %s " % (player_computer['money'], cb)
