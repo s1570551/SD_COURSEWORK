@@ -105,14 +105,14 @@ def input_check(input_value, check_type):
                 return 0
         elif check_type == 3:
             if input_value not in ['P', 'p', 'B', 'b', 'A', 'a', 'E', 'e'] \
-                and input_value.isdigit() == False:
+                and input_value.isdigit() is False:
                 print "Invalid action, please follow the instruction"
                 return 1
             else:
                 return 0
         elif check_type == 4:
             if input_value not in ['S', 's', 'E', 'e'] \
-                and input_value.isdigit() == False:
+                and input_value.isdigit() is False:
                 print "Invalid option, please follow the purchase  instruction"
                 return 1
             else:
@@ -143,7 +143,7 @@ def purchase_supplement(player):
 
 # This function is used to play all cards in hands. This is used by computer by default
 def play_all_cards(player):
-    if(len(player['hand']) > 0):
+    if len(player['hand']) > 0:
         for x in range(0, len(player['hand'])):
             card = player['hand'].pop()
             player['active'].append(card)
@@ -152,10 +152,10 @@ def play_all_cards(player):
 
 # This function put all remaining cards in hand and all cards in active area into discarded pile
 def discard_cards(player):
-    if (len(player['hand']) >0 ):
+    if len(player['hand']) > 0:
         for x in range(0, len(player['hand'])):
             player['discard'].append(player['hand'].pop())
-    if (len(player['active']) > 0 ):
+    if len(player['active']) > 0:
         for x in range(0, len(player['active'])):
             player['discard'].append(player['active'].pop())
 
@@ -185,7 +185,7 @@ if __name__ == '__main__':
         draw_cards(player_human)
         draw_cards(player_computer)
         opponent_type = raw_input("\nWhat kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
-        while (input_check(opponent_type, 2)):
+        while input_check(opponent_type, 2):
             opponent_type = raw_input("\nWhat kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
         aggressive = (opponent_type == 'A' or opponent_type == 'a')
         continue_game = True
@@ -193,8 +193,7 @@ if __name__ == '__main__':
         print "Game starts!!!\n"
 
         while continue_game:
-            money = player_human['money']
-            attack = player_human['attack']
+
             while True:
 
                 display_main_information(player_human, player_computer)
@@ -207,7 +206,7 @@ if __name__ == '__main__':
                     play_all_cards(player_human)
 
                 if act.isdigit():
-                    if(int(act) < len(player_human['hand'])):
+                    if int(act) < len(player_human['hand']):
                         out_card = player_human['hand'].pop(int(act))
                         player_human['active'].append(out_card)
                         player_human['money'] = player_human['money'] + out_card.get_money()
@@ -223,7 +222,7 @@ if __name__ == '__main__':
                             ind = ind + 1
                         print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
                         purchase_option = raw_input("Choose option: ")
-                        while(input_check(purchase_option, 4)):
+                        while input_check(purchase_option, 4):
                             print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
                             purchase_option = raw_input("Choose option: ")
                         if purchase_option == 'S' or purchase_option == 's':
@@ -245,7 +244,7 @@ if __name__ == '__main__':
                                 else:
                                     print "Insufficient money to buy\n"
                             else:
-                                 print "Invalid index! Please enter a valid index number\n"
+                                print "Invalid index! Please enter a valid index number\n"
 
                 if act == 'A' or act == 'a':
                     player_computer['health'] = player_computer['health'] - player_human['attack']
@@ -253,15 +252,14 @@ if __name__ == '__main__':
 
                 if act == 'E'  or act == 'e':
                     player_human['money'] = 0
-                    player_human['attack'] = 0          
+                    player_human['attack'] = 0
                     discard_cards(player_human)
                     draw_cards(player_human)
                     print "\n*****Computer's turn started*****\n"
                     break
 
             print "Available Cards"
-            for card in central['active']:
-                print card
+            show_cards(central['active'])
 
             print "Supplement"
             if len(central['supplement']) > 0:
@@ -270,14 +268,12 @@ if __name__ == '__main__':
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
 
-            money = player_computer['money']
-            attack = player_computer['attack']
             play_all_cards(player_computer)
 
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print " Computer attacking with strength %s" % player_computer['attack']
             player_human['health'] = player_human['health'] - player_computer['attack']
-            attack = 0
+
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
@@ -371,7 +367,7 @@ if __name__ == '__main__':
         print "\n\n==============================================\n\n"
         init_new_game()
         pG = raw_input("\nDo you want to play another game?:")
-        while input_check(pG,1):
+        while input_check(pG, 1):
             pG = raw_input('Do you want to play a game?:')
         play_game = (pG == 'Y' or pG == 'y')
 
