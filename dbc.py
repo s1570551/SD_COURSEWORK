@@ -74,9 +74,9 @@ def init_new_game():
     init_player_decks(player_human)
     init_player_decks(player_computer)
     init_central_deck(central)
-    print "Available Cards"
+    print "\nAvailable Cards"
     show_cards(central['active'])
-    print "Supplement"
+    print "\nSupplement"
     print central['supplement'][0]
 
 # This is a input checker used to check whether the input value is valid
@@ -86,25 +86,25 @@ def init_new_game():
 # 3. Check action input
 def input_check(input_value, check_type):
     if len(input_value) != 1:
-        print "Invalid Input, please input one character at a time!\n"
+        print "Invalid Input, please input one character at a time!"
         return 1
     else:
         if check_type == 1:
             if input_value not in ['Y', 'y', 'N', 'n']:
-                print "Invalid Input, please enter 'Y' or 'N' !\n"
+                print "Invalid Input, please enter 'Y' or 'N' !"
                 return 1
             else:
                 return 0
         elif check_type == 2:
             if input_value not in ['A', 'a', 'Q', 'q']:
-                print "Invalid Input, please enter 'A' or 'Q' !\n"
+                print "Invalid Input, please enter 'A' or 'Q' !"
                 return 1
             else:
                 return 0
         elif check_type == 3:
             if input_value not in ['P', 'p', 'B', 'b', 'A', 'a', 'E', 'e'] \
                 and input_value.isdigit() == False:
-                print "Invalid action, please follow the instruction\n"
+                print "Invalid action, please follow the instruction"
                 return 1
             else:
                 return 0
@@ -118,10 +118,29 @@ def display_main_information(player1, player2):
     print "\nYour Active Cards"
     show_cards(player1['active'])
     print "\nYour money %s \nYour attack %s\n" % (player1['money'], player1['attack'])
-    print "\nChoose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)\n"
+    print "Choose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
 
+# This function is used when the purchase of supplement occurs
+def purchase_supplement(player):
+    if len(central['supplement']) > 0:
+        if player['money'] >= central['supplement'][0].cost:
+            player['money'] = player['money'] - central['supplement'][0].cost
+            player['discard'].append(central['supplement'].pop())
+            print "Supplement Bought"
+        else:
+            print "insufficient money to buy"
+    else:
+        print "no supplements left"
 
-# Card list should be constant and can be modified here
+def play_all_cards(player):
+    if(len(player['hand']) > 0):
+        for x in range(0, len(player['hand'])):
+            card = player['hand'].pop()
+            player['active'].append(card)
+            player['money'] = player['money'] + card.get_money()
+            player['attack'] = player['attack'] + card.get_attack()
+
+# Card list should be consistent and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
            3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)], \
            3 * [Card('Tailor', (0, 4), 3)], 3 * [Card('Crossbowman', (4, 0), 3)], \
@@ -138,16 +157,16 @@ if __name__ == '__main__':
     central = {}
 
     init_new_game()
-    pG = raw_input('Do you want to play a game?\nY = Yes , N = No: ')
+    pG = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
     while input_check(pG, 1):
-        pG = raw_input('Do you want to play a game?\nY = Yes , N = No: ')
+        pG = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
     play_game = (pG == 'Y' or pG == 'y')
     while play_game:
         draw_cards(player_human)
         draw_cards(player_computer)
-        opponent_type = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
+        opponent_type = raw_input("\nWhat kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
         while (input_check(opponent_type, 2)):
-            opponent_type = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
+            opponent_type = raw_input("\nWhat kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
         aggressive = (opponent_type == 'A' or opponent_type == 'a')
         continue_game = True
         print "\n\n==============================================\n\n"
@@ -157,20 +176,15 @@ if __name__ == '__main__':
             money = player_human['money']
             attack = player_human['attack']
             while True:
-                
+
                 display_main_information(player_human, player_computer)
 
                 act = raw_input("Enter Action: ")
                 while input_check(act, 3):
-                    print "Choose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)\n"
+                    print "\nChoose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
                     act = raw_input("Enter Action: ")
                 if act == 'P' or act == 'p':
-                    if(len(player_human['hand']) > 0):
-                        for x in range(0, len(player_human['hand'])):
-                            card = player_human['hand'].pop()
-                            player_human['active'].append(card)
-                            player_human['money'] = player_human['money'] + card.get_money()
-                            player_human['attack'] = player_human['attack'] + card.get_attack()
+                    play_all_cards(player_human)
 
                 if act.isdigit():
                     if(int(act) < len(player_human['hand'])):
@@ -190,15 +204,7 @@ if __name__ == '__main__':
                         print "Choose a card to buy [0-n], S for supplement, E to end buying"
                         bv = raw_input("Choose option: ")
                         if bv == 'S' or bv == 's':
-                            if len(central['supplement']) > 0:
-                                if player_human['money'] >= central['supplement'][0].cost:
-                                    player_human['money'] = player_human['money'] - central['supplement'][0].cost
-                                    player_human['discard'].append(central['supplement'].pop())
-                                    print "Supplement Bought"
-                                else:
-                                    print "insufficient money to buy"
-                            else:
-                                print "no supplements left"
+                            purchase_supplement(player_human)
                         elif bv == 'E' or bv == 'e':
                             notending = False
                             break
@@ -253,11 +259,7 @@ if __name__ == '__main__':
 
             money = player_computer['money']
             attack = player_computer['attack']
-            for x in range(0, len(player_computer['hand'])):
-                card = player_computer['hand'].pop()
-                player_computer['active'].append(card)
-                player_computer['money'] = player_computer['money'] + card.get_money()
-                player_computer['attack'] = player_computer['attack'] + card.get_attack()
+            play_all_cards(player_computer)
 
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print " Computer attacking with strength %s" % player_computer['attack']
@@ -306,13 +308,7 @@ if __name__ == '__main__':
                             else:
                                 print "Error Occurred"
                         else:
-                            if player_computer['money'] >= central['supplement'][0].cost:
-                                player_computer['money'] = player_computer['money'] - central['supplement'][0].cost
-                                card = central['supplement'].pop()
-                                player_computer['discard'].append(card)
-                                print "Supplement Bought %s" % card
-                            else:
-                                print "Error Occurred"
+                            purchase_supplement(player_computer)
                     else:
                         cb = False
                     if player_computer['money'] == 0:
