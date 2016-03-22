@@ -159,6 +159,32 @@ def discard_cards(player):
         for x in range(0, len(player['active'])):
             player['discard'].append(player['active'].pop())
 
+def  will_continue():
+    if player_human['health'] <= 0:
+        print "Computer wins"
+        return False
+    elif player_computer['health'] <= 0:
+        print 'Player One Wins'
+        return False
+    elif central['activeSize'] == 0:
+        print "No more cards available"
+        if player_human['health'] > player_computer['health']:
+            print "Player One Wins on Health"
+        elif player_computer['health'] > player_human['health']:
+            print "Computer Wins"
+        else:
+            pHT = 0
+            player_computerT = 0
+            if pHT > player_computerT:
+                print "Player One Wins on Card Strength"
+            elif player_computerT > pHT:
+                print "Computer Wins on Card Strength"
+            else:
+                print "Draw"
+        return False
+    else:
+        return True
+
 # Card list should be consistent and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
            3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)], \
@@ -195,6 +221,13 @@ if __name__ == '__main__':
         while continue_game:
 
             while True:
+
+                print "Available Cards"
+                show_cards(central['active'])
+                print "Supplement"
+                if len(central['supplement']) > 0:
+                    print central['supplement'][0]
+                    print "\n"
 
                 display_main_information(player_human, player_computer)
 
@@ -250,6 +283,10 @@ if __name__ == '__main__':
                     player_computer['health'] = player_computer['health'] - player_human['attack']
                     player_human['attack'] = 0
 
+                    continue_game = will_continue()
+                    if(continue_game is False):
+                        break
+
                 if act == 'E'  or act == 'e':
                     player_human['money'] = 0
                     player_human['attack'] = 0
@@ -257,6 +294,9 @@ if __name__ == '__main__':
                     draw_cards(player_human)
                     print "\n*****Computer's turn started*****\n"
                     break
+
+            if(continue_game is False):
+                break
 
             print "Available Cards"
             show_cards(central['active'])
@@ -328,42 +368,9 @@ if __name__ == '__main__':
             discard_cards(player_computer)
             draw_cards(player_computer)
             print "\n*****Computer's turn finished*****"
-            print "\n\n==============================================\n\n"
+            #print "\n\n==============================================\n\n"
 
-            print "Available Cards"
-            for card in central['active']:
-                print card
-
-            print "Supplement"
-            if len(central['supplement']) > 0:
-                print central['supplement'][0]
-                print "\n"
-
-            #print "\nPlayer Health %s" % player_human['health']
-            #print "Computer Health %s" % player_computer['health']
-
-            if player_human['health'] <= 0:
-                continue_game = False
-                print "Computer wins"
-            elif player_computer['health'] <= 0:
-                continue_game = False
-                print 'Player One Wins'
-            elif central['activeSize'] == 0:
-                print "No more cards available"
-                if player_human['health'] > player_computer['health']:
-                    print "Player One Wins on Health"
-                elif player_computer['health'] > player_human['health']:
-                    print "Computer Wins"
-                else:
-                    pHT = 0
-                    player_computerT = 0
-                    if pHT > player_computerT:
-                        print "Player One Wins on Card Strength"
-                    elif player_computerT > pHT:
-                        print "Computer Wins on Card Strength"
-                    else:
-                        print "Draw"
-                continue_game = False
+            continue_game = will_continue()
         print "\n\n==============================================\n\n"
         init_new_game()
         pG = raw_input("\nDo you want to play another game?:")
