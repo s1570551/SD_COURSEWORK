@@ -133,6 +133,7 @@ def purchase_supplement(player):
     else:
         print "no supplements left"
 
+# This function is used to play all cards in hands. This is used by computer by default
 def play_all_cards(player):
     if(len(player['hand']) > 0):
         for x in range(0, len(player['hand'])):
@@ -140,6 +141,15 @@ def play_all_cards(player):
             player['active'].append(card)
             player['money'] = player['money'] + card.get_money()
             player['attack'] = player['attack'] + card.get_attack()
+
+# This function put all remaining cards in hand and all cards in active area into discarded pile
+def discard_cards(player):
+    if (len(player['hand']) >0 ):
+        for x in range(0, len(player['hand'])):
+            player['discard'].append(player['hand'].pop())
+    if (len(player['active']) > 0 ):
+        for x in range(0, len(player['active'])):
+            player['discard'].append(player['active'].pop())
 
 # Card list should be consistent and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
@@ -228,22 +238,14 @@ if __name__ == '__main__':
                         else:
                             print "Enter a valid option"
 
-
                 if act == 'A' or act == 'a':
                     player_computer['health'] = player_computer['health'] - player_human['attack']
                     player_human['attack'] = 0
+
                 if act == 'E'  or act == 'e':
                     player_human['money'] = 0
-                    player_human['attack'] = 0
-                    if (len(player_human['hand']) >0 ):
-                        for x in range(0, len(player_human['hand'])):
-                            player_human['discard'].append(player_human['hand'].pop())
-
-
-                    if (len(player_human['active']) > 0 ):
-                        for x in range(0, len(player_human['active'])):
-                            player_human['discard'].append(player_human['active'].pop())
-
+                    player_human['attack'] = 0          
+                    discard_cards(player_human)
                     draw_cards(player_human)
                     print "\n*****Computer's turn started*****\n"
                     break
@@ -316,15 +318,9 @@ if __name__ == '__main__':
 
             else:
                 print "No Money to buy anything"
-
-            if len(player_computer['hand']) > 0:
-                for x in range(0, len(player_computer['hand'])):
-                    player_computer['discard'].append(player_computer['hand'].pop())
-            if len(player_computer['active']) > 0:
-                for x in range(0, len(player_computer['active'])):
-                    player_computer['discard'].append(player_computer['active'].pop())
             player_computer['attack'] = 0
             player_computer['money'] = 0
+            discard_cards(player_computer)
             draw_cards(player_computer)
             print "\n*****Computer's turn finished*****"
             print "\n\n==============================================\n\n"
