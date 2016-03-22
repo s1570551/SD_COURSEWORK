@@ -85,6 +85,7 @@ def init_new_game():
 # 1. Check start game input
 # 2. Check opponent selection input
 # 3. Check action input
+# 4. Check purchase option input
 def input_check(input_value, check_type):
     if len(input_value) != 1:
         print "Invalid Input, please input one character at a time!"
@@ -106,6 +107,13 @@ def input_check(input_value, check_type):
             if input_value not in ['P', 'p', 'B', 'b', 'A', 'a', 'E', 'e'] \
                 and input_value.isdigit() == False:
                 print "Invalid action, please follow the instruction"
+                return 1
+            else:
+                return 0
+        elif check_type == 4:
+            if input_value not in ['S', 's', 'E', 'e'] \
+                and input_value.isdigit() == False:
+                print "Invalid option, please follow the purchase  instruction"
                 return 1
             else:
                 return 0
@@ -213,8 +221,11 @@ if __name__ == '__main__':
                         for card in central['active']:
                             print "[%s] %s" % (ind, card)
                             ind = ind + 1
-                        print "Choose a card to buy [0-n], S for supplement, E to end buying"
+                        print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
                         purchase_option = raw_input("Choose option: ")
+                        while(input_check(purchase_option, 4)):
+                            print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
+                            purchase_option = raw_input("Choose option: ")
                         if purchase_option == 'S' or purchase_option == 's':
                             purchase_supplement(player_human)
                         elif purchase_option == 'E' or purchase_option == 'e':
@@ -232,11 +243,9 @@ if __name__ == '__main__':
                                         central['activeSize'] = central['activeSize'] - 1
                                     print "Card bought"
                                 else:
-                                    print "insufficient money to buy"
+                                    print "Insufficient money to buy\n"
                             else:
-                                 print "enter a valid index number"
-                        else:
-                            print "Enter a valid option"
+                                 print "Invalid index! Please enter a valid index number\n"
 
                 if act == 'A' or act == 'a':
                     player_computer['health'] = player_computer['health'] - player_human['attack']
