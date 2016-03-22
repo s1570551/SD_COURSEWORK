@@ -51,7 +51,7 @@ def init_central_deck(central_deck):
     deck = list(itertools.chain.from_iterable(sdc))
     random.shuffle(deck)
     central['deck'] = deck
-    central['supplement'] = supplement
+    central['supplement'] = list(itertools.chain.from_iterable(supplement))
     central['active'] = []
     max = central['activeSize']
     count = 0
@@ -128,7 +128,7 @@ sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
            3 * [Card('Merchant', (0, 5), 4)], 4 * [Card('Thug', (2, 0), 1)], \
            4 * [Card('Thief', (1, 1), 1)], 2 * [Card('Catapault', (7, 0), 6)], \
            2 * [Card('Caravan', (1, 5), 5)], 2 * [Card('Assassin', (5, 0), 4)]]
-supplement = 10 * [Card('Levy', (1, 2), 2)]
+supplement = [10 * [Card('Levy', (1, 2), 2)]]
 
 if __name__ == '__main__':
 
@@ -145,10 +145,10 @@ if __name__ == '__main__':
     while play_game:
         draw_cards(player_human)
         draw_cards(player_computer)
-        oT = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
-        while (input_check(oT, 2)):
-            oT = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
-        aggressive = (oT == 'A' or oT == 'a')
+        opponent_type = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
+        while (input_check(opponent_type, 2)):
+            opponent_type = raw_input("What kind of opponent do you want?\nA = Aggressive opponent, Q = acquisative opponent:")
+        aggressive = (opponent_type == 'A' or opponent_type == 'a')
         continue_game = True
         print "\n\n==============================================\n\n"
         print "Game starts!!!\n"
@@ -157,7 +157,7 @@ if __name__ == '__main__':
             money = player_human['money']
             attack = player_human['attack']
             while True:
-
+                
                 display_main_information(player_human, player_computer)
 
                 act = raw_input("Enter Action: ")
