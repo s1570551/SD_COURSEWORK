@@ -16,9 +16,10 @@ class Card(object):
 
 # This function is used to initialize player deck.
 def init_player_decks(player):
-    init_cards = [8 * [Card('Serf', (0, 1), 0)], 2 * [Card('Squire', (1, 0), 0)]]
-    pod = list(itertools.chain.from_iterable(init_cards))
-    player['deck'] = pod
+    init_deck = list(itertools.chain.from_iterable(init_cards))
+    # If the init deck is not supposed to be the same all the time
+    # statement of random.shuffle(init_deck) should be add here
+    player['deck'] = init_deck
     player['hand'] = []
     player['discard'] = []
     player['active'] = []
@@ -148,6 +149,7 @@ sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
            4 * [Card('Thief', (1, 1), 1)], 2 * [Card('Catapault', (7, 0), 6)], \
            2 * [Card('Caravan', (1, 5), 5)], 2 * [Card('Assassin', (5, 0), 4)]]
 supplement = [10 * [Card('Levy', (1, 2), 2)]]
+init_cards = [8 * [Card('Serf', (0, 1), 0)], 2 * [Card('Squire', (1, 0), 0)]]
 
 if __name__ == '__main__':
 
@@ -202,17 +204,17 @@ if __name__ == '__main__':
                             print "[%s] %s" % (ind, card)
                             ind = ind + 1
                         print "Choose a card to buy [0-n], S for supplement, E to end buying"
-                        bv = raw_input("Choose option: ")
-                        if bv == 'S' or bv == 's':
+                        purchase_option = raw_input("Choose option: ")
+                        if purchase_option == 'S' or purchase_option == 's':
                             purchase_supplement(player_human)
-                        elif bv == 'E' or bv == 'e':
+                        elif purchase_option == 'E' or purchase_option == 'e':
                             notending = False
                             break
-                        elif bv.isdigit():
-                            if int(bv) < len(central['active']):
-                                if player_human['money'] >= central['active'][int(bv)].cost:
-                                    player_human['money'] = player_human['money'] - central['active'][int(bv)].cost
-                                    player_human['discard'].append(central['active'].pop(int(bv)))
+                        elif purchase_option.isdigit():
+                            if int(purchase_option) < len(central['active']):
+                                if player_human['money'] >= central['active'][int(purchase_option)].cost:
+                                    player_human['money'] = player_human['money'] - central['active'][int(purchase_option)].cost
+                                    player_human['discard'].append(central['active'].pop(int(purchase_option)))
                                     if len(central['deck']) > 0:
                                         card = central['deck'].pop()
                                         central['active'].append(card)
@@ -270,10 +272,10 @@ if __name__ == '__main__':
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print "Computer buying"
             if player_computer['money'] > 0:
-                cb = True
+                computer_purcase = True
                 templist = []
-                print "Starting Money %s and cb %s " % (player_computer['money'], cb)
-                while cb:
+                print "Starting Money %s and computer_purcase %s " % (player_computer['money'], computer_purcase)
+                while computer_purcase:
                     templist = []
                     if len(central['supplement']) > 0:
                         if central['supplement'][0].cost <= player_computer['money']:
@@ -310,9 +312,8 @@ if __name__ == '__main__':
                         else:
                             purchase_supplement(player_computer)
                     else:
-                        cb = False
-                    if player_computer['money'] == 0:
-                        cb = False
+                        computer_purcase = False
+
             else:
                 print "No Money to buy anything"
 
