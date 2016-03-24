@@ -193,6 +193,39 @@ def show_available_cards():
     if len(central['supplement']) > 0:
         print central['supplement'][0]
 
+def human_purchase():
+    while player_human['money'] > 0:
+        print "Available money: %s" % player_human['money']
+        print "Available Cards"
+        ind = 0
+        for card in central['active']:
+            print "[%s] %s" % (ind, card)
+            ind = ind + 1
+        print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
+        purchase_option = raw_input("Choose option: ")
+        while input_check(purchase_option, 4):
+            print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
+            purchase_option = raw_input("Choose option: ")
+        if purchase_option == 'S' or purchase_option == 's':
+            purchase_supplement(player_human)
+        elif purchase_option == 'E' or purchase_option == 'e':
+            break
+        elif purchase_option.isdigit():
+            if int(purchase_option) < len(central['active']):
+                if player_human['money'] >= central['active'][int(purchase_option)].cost:
+                    player_human['money'] = player_human['money'] - central['active'][int(purchase_option)].cost
+                    player_human['discard'].append(central['active'].pop(int(purchase_option)))
+                    if len(central['deck']) > 0:
+                        card = central['deck'].pop()
+                        central['active'].append(card)
+                    else:
+                        central['activeSize'] = central['activeSize'] - 1
+                    print "Card bought"
+                else:
+                    print "Insufficient money to buy\n"
+            else:
+                print "Invalid index! Please enter a valid index number\n"
+
 # Card list should be consistent and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
            3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)], \
@@ -253,39 +286,7 @@ if __name__ == '__main__':
                         print "Invalid index! Please enter a valid index number\n"
 
                 if act == 'B' or act == 'b':
-                    notending = True
-                    while player_human['money'] > 0:
-                        print "Available money: %s" % player_human['money']
-                        print "Available Cards"
-                        ind = 0
-                        for card in central['active']:
-                            print "[%s] %s" % (ind, card)
-                            ind = ind + 1
-                        print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
-                        purchase_option = raw_input("Choose option: ")
-                        while input_check(purchase_option, 4):
-                            print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
-                            purchase_option = raw_input("Choose option: ")
-                        if purchase_option == 'S' or purchase_option == 's':
-                            purchase_supplement(player_human)
-                        elif purchase_option == 'E' or purchase_option == 'e':
-                            notending = False
-                            break
-                        elif purchase_option.isdigit():
-                            if int(purchase_option) < len(central['active']):
-                                if player_human['money'] >= central['active'][int(purchase_option)].cost:
-                                    player_human['money'] = player_human['money'] - central['active'][int(purchase_option)].cost
-                                    player_human['discard'].append(central['active'].pop(int(purchase_option)))
-                                    if len(central['deck']) > 0:
-                                        card = central['deck'].pop()
-                                        central['active'].append(card)
-                                    else:
-                                        central['activeSize'] = central['activeSize'] - 1
-                                    print "Card bought"
-                                else:
-                                    print "Insufficient money to buy\n"
-                            else:
-                                print "Invalid index! Please enter a valid index number\n"
+                    human_purchase()
 
                 if act == 'A' or act == 'a':
                     player_computer['health'] = player_computer['health'] - player_human['attack']
