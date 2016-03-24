@@ -104,7 +104,7 @@ def input_check(input_value, check_type):
             else:
                 return 0
         elif check_type == 3:
-            if input_value not in ['P', 'p', 'B', 'b', 'A', 'a', 'E', 'e'] \
+            if input_value not in ['P', 'p', 'B', 'b', 'A', 'a', 'E', 'e', 'V', 'v'] \
                 and input_value.isdigit() is False:
                 print "Invalid action, please follow the instruction"
                 return 1
@@ -113,7 +113,7 @@ def input_check(input_value, check_type):
         elif check_type == 4:
             if input_value not in ['S', 's', 'E', 'e'] \
                 and input_value.isdigit() is False:
-                print "Invalid option, please follow the purchase  instruction"
+                print "Invalid option, please follow the purchase instruction"
                 return 1
             else:
                 return 0
@@ -127,7 +127,7 @@ def display_main_information(player1, player2):
     print "\nYour Active Cards"
     show_cards(player1['active'])
     print "\nYour money %s \nYour attack %s\n" % (player1['money'], player1['attack'])
-    print "Choose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
+    print "Choose Action: (V = View available cards, P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
 
 # This function is used when the purchase of supplement occurs
 def purchase_supplement(player):
@@ -186,6 +186,13 @@ def  will_continue():
     else:
         return True
 
+def show_available_cards():
+    print "Available Cards"
+    show_cards(central['active'])
+    print "Supplement"
+    if len(central['supplement']) > 0:
+        print central['supplement'][0]
+
 # Card list should be consistent and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
            3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)], \
@@ -218,24 +225,21 @@ if __name__ == '__main__':
         continue_game = True
         print "\n\n==============================================\n\n"
         print "Game starts!!!\n"
+        show_available_cards()
 
         while continue_game:
 
             while True:
 
-                print "Available Cards"
-                show_cards(central['active'])
-                print "Supplement"
-                if len(central['supplement']) > 0:
-                    print central['supplement'][0]
-                    print "\n"
-
                 display_main_information(player_human, player_computer)
 
                 act = raw_input("Enter Action: ")
                 while input_check(act, 3):
-                    print "\nChoose Action: (P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
+                    print "\nChoose Action: (V = View available cards, P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
                     act = raw_input("Enter Action: ")
+                if act == 'V' or act == 'v':
+                    show_available_cards()
+
                 if act == 'P' or act == 'p':
                     play_all_cards(player_human)
 
@@ -300,12 +304,7 @@ if __name__ == '__main__':
             if(continue_game is False):
                 break
 
-            print "Available Cards"
-            show_cards(central['active'])
-
-            print "Supplement"
-            if len(central['supplement']) > 0:
-                print central['supplement'][0]
+            show_available_cards()
 
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
