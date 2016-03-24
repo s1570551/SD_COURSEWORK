@@ -249,6 +249,8 @@ if __name__ == '__main__':
                         player_human['active'].append(out_card)
                         player_human['money'] = player_human['money'] + out_card.get_money()
                         player_human['attack'] = player_human['attack'] + out_card.get_attack()
+                    else:
+                        print "Invalid index! Please enter a valid index number\n"
 
                 if act == 'B' or act == 'b':
                     notending = True
