@@ -159,6 +159,7 @@ def discard_cards(player):
         for x in range(0, len(player['active'])):
             player['discard'].append(player['active'].pop())
 
+# This function is called to decide whethe the game is finished
 def  will_continue():
     if player_human['health'] <= 0:
         print "Computer wins"
@@ -248,6 +249,7 @@ if __name__ == '__main__':
                 if act == 'B' or act == 'b':
                     notending = True
                     while player_human['money'] > 0:
+                        print "Available money: %s" % player_human['money']
                         print "Available Cards"
                         ind = 0
                         for card in central['active']:
