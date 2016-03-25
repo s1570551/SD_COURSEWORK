@@ -61,20 +61,20 @@ def init_player_info(player):
 # This function is used to initialize central deck
 def init_central_deck(central_deck):
     central_deck['name'] = 'central'
-    central_deck['activeSize'] = 5
+    central_deck['active_size'] = 5
     deck = list(itertools.chain.from_iterable(sdc))
     random.shuffle(deck)
     central_deck['deck'] = deck
     sup = list(itertools.chain.from_iterable(supplement))
     central_deck['supplement'] = sup
     central_deck['active'] = []
-    max_size = central_deck['activeSize']
+    max_size = central_deck['active_size']
     count = 0
     while count < max_size:
         card = central_deck['deck'].pop()
         central_deck['active'].append(card)
         count = count + 1
-    if central_deck['name'] == 'central' and central_deck['activeSize'] == 5 and\
+    if central_deck['name'] == 'central' and central_deck['active_size'] == 5 and\
     central_deck['active'] != [] and central_deck['deck'] == deck and\
     central_deck['supplement'] == sup:
         return 0
@@ -212,13 +212,16 @@ def  will_continue(player1, player2, central_deck):
     elif player2['health'] <= 0:
         print 'Player One Wins'
         return False
-    elif central_deck['activeSize'] == 0:
+    elif central_deck['active_size'] == 0:
         print "No more cards available"
         if player1['health'] > player2['health']:
             print "Player One Wins on Health"
         elif player2['health'] > player1['health']:
             print "Computer Wins"
         else:
+            # As the draw condition is not clear in the requirement, 
+            # this part of code is comment out and just display draw
+            '''
             pHT = 0
             player_computerT = 0
             if pHT > player_computerT:
@@ -227,6 +230,8 @@ def  will_continue(player1, player2, central_deck):
                 print "Computer Wins on Card Strength"
             else:
                 print "Draw"
+            '''
+            print "Draw"
         return False
     else:
         return True
@@ -270,7 +275,7 @@ def human_purchase():
                         card = central['deck'].pop()
                         central['active'].append(card)
                     else:
-                        central['activeSize'] = central['activeSize'] - 1
+                        central['active_size'] = central['active_size'] - 1
                     if len(player_human['discard']) == original_discard_length + 1:
                         print "Card bought: %s" % card
                     else:
@@ -294,7 +299,7 @@ def computer_purchase():
         if len(central['supplement']) > 0:
             if central['supplement'][0].cost <= player_computer['money']:
                 templist.append(("S", central['supplement'][0]))
-        for intindex in range(0, central['activeSize']):
+        for intindex in range(0, central['active_size']):
             if central['active'][intindex].cost <= player_computer['money']:
                 templist.append((intindex, central['active'][intindex]))
         if len(templist) > 0:
@@ -333,7 +338,7 @@ def computer_purchase():
                         card = central['deck'].pop()
                         central['active'].append(card)
                     else:
-                        central['activeSize'] = central['activeSize'] - 1
+                        central['active_size'] = central['active_size'] - 1
                 else:
                     print "Error Occurred"
             else:
@@ -409,6 +414,10 @@ if __name__ == '__main__':
                     # purchase cards
                     if human_purchase():
                         exit(-1)
+                    # check if no more cards in central['active'] deck
+                    continue_game = will_continue(player_human, player_computer, central)
+                    if continue_game is False:
+                        break
                 if act == 'A' or act == 'a':
                     # attace opponent
                     player_computer['health'] = player_computer['health'] - player_human['attack']
@@ -467,6 +476,10 @@ if __name__ == '__main__':
                     exit(-1)
             else:
                 print "No Money to buy anything"
+            # check if no more cards in central['active'] deck
+            continue_game = will_continue(player_human, player_computer, central)
+            if continue_game is False:
+                break
 
             # reset attack and wealth value
             player_computer['attack'] = 0
