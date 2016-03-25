@@ -334,7 +334,6 @@ if __name__ == '__main__':
                 if act == 'A' or act == 'a':
                     player_computer['health'] = player_computer['health'] - player_human['attack']
                     player_human['attack'] = 0
-
                     continue_game = will_continue()
                     if(continue_game is False):
                         break
@@ -360,12 +359,15 @@ if __name__ == '__main__':
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print " Computer attacking with strength %s" % player_computer['attack']
             player_human['health'] = player_human['health'] - player_computer['attack']
+            if(continue_game is False):
+                break
 
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
-            print "Computer buying"
+
             if player_computer['money'] > 0:
+                print "Computer buying"
                 computer_purchase()
 
             else:
@@ -375,9 +377,7 @@ if __name__ == '__main__':
             discard_cards(player_computer)
             draw_cards(player_computer)
             print "\n*****Computer's turn finished*****"
-            #print "\n\n==============================================\n\n"
 
-            continue_game = will_continue()
         print "\n\n==============================================\n\n"
         init_new_game()
         pG = raw_input("\nDo you want to play another game?:")
