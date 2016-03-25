@@ -226,6 +226,49 @@ def human_purchase():
             else:
                 print "Invalid index! Please enter a valid index number\n"
 
+def computer_purchase():
+    computer_purcase = True
+    templist = []
+    print "Starting Money %s and computer_purcase %s " % (player_computer['money'], computer_purcase)
+    while computer_purcase:
+        templist = []
+        if len(central['supplement']) > 0:
+            if central['supplement'][0].cost <= player_computer['money']:
+                templist.append(("S", central['supplement'][0]))
+        for intindex in range(0, central['activeSize']):
+            if central['active'][intindex].cost <= player_computer['money']:
+                templist.append((intindex, central['active'][intindex]))
+        if len(templist) > 0:
+            highestIndex = 0
+            for intindex in range(0, len(templist)):
+                if templist[intindex][1].cost > templist[highestIndex][1].cost:
+                    highestIndex = intindex
+                if templist[intindex][1].cost == templist[highestIndex][1].cost:
+                    if aggressive:
+                        if templist[intindex][1].get_attack() > templist[highestIndex][1].get_attack():
+                            highestIndex = intindex
+                    else:
+                        if templist[intindex][1].get_money() > templist[highestIndex][1].get_money():
+                            highestIndex = intindex
+            source = templist[highestIndex][0]
+            if source in range(0, 5):
+                if player_computer['money'] >= central['active'][int(source)].cost:
+                    player_computer['money'] = player_computer['money'] - central['active'][int(source)].cost
+                    card = central['active'].pop(int(source))
+                    print "Card bought %s" % card
+                    player_computer['discard'].append(card)
+                    if len(central['deck']) > 0:
+                        card = central['deck'].pop()
+                        central['active'].append(card)
+                    else:
+                        central['activeSize'] = central['activeSize'] - 1
+                else:
+                    print "Error Occurred"
+            else:
+                purchase_supplement(player_computer)
+        else:
+            computer_purcase = False
+
 # Card list should be consistent and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
            3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)], \
@@ -323,47 +366,7 @@ if __name__ == '__main__':
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print "Computer buying"
             if player_computer['money'] > 0:
-                computer_purcase = True
-                templist = []
-                print "Starting Money %s and computer_purcase %s " % (player_computer['money'], computer_purcase)
-                while computer_purcase:
-                    templist = []
-                    if len(central['supplement']) > 0:
-                        if central['supplement'][0].cost <= player_computer['money']:
-                            templist.append(("S", central['supplement'][0]))
-                    for intindex in range(0, central['activeSize']):
-                        if central['active'][intindex].cost <= player_computer['money']:
-                            templist.append((intindex, central['active'][intindex]))
-                    if len(templist) > 0:
-                        highestIndex = 0
-                        for intindex in range(0, len(templist)):
-                            if templist[intindex][1].cost > templist[highestIndex][1].cost:
-                                highestIndex = intindex
-                            if templist[intindex][1].cost == templist[highestIndex][1].cost:
-                                if aggressive:
-                                    if templist[intindex][1].get_attack() > templist[highestIndex][1].get_attack():
-                                        highestIndex = intindex
-                                else:
-                                    if templist[intindex][1].get_attack() > templist[highestIndex][1].get_money():
-                                        highestIndex = intindex
-                        source = templist[highestIndex][0]
-                        if source in range(0, 5):
-                            if player_computer['money'] >= central['active'][int(source)].cost:
-                                player_computer['money'] = player_computer['money'] - central['active'][int(source)].cost
-                                card = central['active'].pop(int(source))
-                                print "Card bought %s" % card
-                                player_computer['discard'].append(card)
-                                if len(central['deck']) > 0:
-                                    card = central['deck'].pop()
-                                    central['active'].append(card)
-                                else:
-                                    central['activeSize'] = central['activeSize'] - 1
-                            else:
-                                print "Error Occurred"
-                        else:
-                            purchase_supplement(player_computer)
-                    else:
-                        computer_purcase = False
+                computer_purchase()
 
             else:
                 print "No Money to buy anything"
