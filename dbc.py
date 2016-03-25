@@ -60,23 +60,23 @@ def init_player_info(player):
 
 # This function is used to initialize central deck
 def init_central_deck(central_deck):
-    central['name'] = 'central'
-    central['activeSize'] = 5
+    central_deck['name'] = 'central'
+    central_deck['activeSize'] = 5
     deck = list(itertools.chain.from_iterable(sdc))
     random.shuffle(deck)
-    central['deck'] = deck
+    central_deck['deck'] = deck
     sup = list(itertools.chain.from_iterable(supplement))
-    central['supplement'] = sup
-    central['active'] = []
-    max = central['activeSize']
+    central_deck['supplement'] = sup
+    central_deck['active'] = []
+    max = central_deck['activeSize']
     count = 0
     while count < max:
-        card = central['deck'].pop()
-        central['active'].append(card)
+        card = central_deck['deck'].pop()
+        central_deck['active'].append(card)
         count = count + 1
-    if central['name'] == 'central' and central['activeSize'] == 5 and\
-    central['active'] != [] and central['deck'] == deck and\
-    central['supplement'] == sup:
+    if central_deck['name'] == 'central' and central_deck['activeSize'] == 5 and\
+    central_deck['active'] != [] and central_deck['deck'] == deck and\
+    central_deck['supplement'] == sup:
         return 0
     else:
         return 1
@@ -96,13 +96,13 @@ def show_cards(card_list):
 def init_new_game():
     if init_player_info(player_human) or init_player_info(player_computer):
         print "Players fail to initialized"
-        return -1
+        return 1
     if init_player_decks(player_human) or init_player_decks(player_computer):
         print "Players' deck fail to initialized"
-        return -1
+        return 1
     if init_central_deck(central):
         print "central deck fail to initialized"
-        return -1
+        return 1
     show_available_cards()
     return 0
 
@@ -269,7 +269,7 @@ def human_purchase():
                     else:
                         central['activeSize'] = central['activeSize'] - 1
                     if len(player_human['discard']) == original_discard_length + 1:
-                        print "Card bought %s" % card
+                        print "Card bought: %s" % card
                     else:
                         print "card purchase failed"
                         return 1
@@ -310,7 +310,7 @@ def computer_purchase():
                     card = central['active'].pop(int(source))
                     player_computer['discard'].append(card)
                     if len(player_computer['discard']) == original_discard_length + 1:
-                        print "Card bought %s" % card
+                        print "Card bought: %s" % card
                     else:
                         print "card purchase failed"
                         return 1
@@ -364,8 +364,8 @@ if __name__ == '__main__':
         show_available_cards()
 
         while continue_game:
-
-            while True:
+            human_round = True
+            while human_round:
 
                 if display_main_information(player_human, player_computer):
                     print "Error occurs when displaying cards"
@@ -413,7 +413,7 @@ if __name__ == '__main__':
                         exit(-1)
                     draw_cards(player_human)
                     print "\n*****Computer's turn started*****\n"
-                    break
+                    human_round = False
 
             if(continue_game is False):
                 break
