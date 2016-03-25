@@ -68,9 +68,9 @@ def init_central_deck(central_deck):
     sup = list(itertools.chain.from_iterable(supplement))
     central_deck['supplement'] = sup
     central_deck['active'] = []
-    max = central_deck['activeSize']
+    max_size = central_deck['activeSize']
     count = 0
-    while count < max:
+    while count < max_size:
         card = central_deck['deck'].pop()
         central_deck['active'].append(card)
         count = count + 1
@@ -83,7 +83,7 @@ def init_central_deck(central_deck):
 
 # This function is used to print all cards in the list
 def show_cards(card_list):
-    index  = 0
+    index = 0
     for card in card_list:
         print "[%s] %s " % (index, card)
         index = index + 1
@@ -189,7 +189,7 @@ def play_all_cards(player):
             player['active'].append(card)
             money = money + card.get_money()
             attack = attack + card.get_attack()
-    return [money,attack]
+    return [money, attack]
 
 # This function put all remaining cards in hand and all cards in active area into discarded pile
 def discard_cards(player):
@@ -314,7 +314,7 @@ def computer_purchase():
                     else:
                         print "card purchase failed"
                         return 1
-                    
+
                     if len(central['deck']) > 0:
                         card = central['deck'].pop()
                         central['active'].append(card)
@@ -402,7 +402,7 @@ if __name__ == '__main__':
                     print "\nPlayer Health %s" % player_human['health']
                     print "Computer Health %s" % player_computer['health']
                     continue_game = will_continue()
-                    if(continue_game is False):
+                    if continue_game is False:
                         break
 
                 if act == 'E'  or act == 'e':
@@ -415,7 +415,7 @@ if __name__ == '__main__':
                     print "\n*****Computer's turn started*****\n"
                     human_round = False
 
-            if(continue_game is False):
+            if continue_game is False:
                 break
 
             show_available_cards()
@@ -435,7 +435,7 @@ if __name__ == '__main__':
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
             continue_game = will_continue()
-            if(continue_game is False):
+            if continue_game is False:
                 break
 
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
