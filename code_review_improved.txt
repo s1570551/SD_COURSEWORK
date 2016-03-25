@@ -1,0 +1,184 @@
+************* Module dbc
+C:160, 0: Line too long (131/100) (line-too-long)
+C:272, 0: Line too long (112/100) (line-too-long)
+C:295, 0: Line too long (101/100) (line-too-long)
+C:317, 0: Line too long (103/100) (line-too-long)
+C:320, 0: Line too long (101/100) (line-too-long)
+C:326, 0: Line too long (109/100) (line-too-long)
+C:376, 0: Line too long (125/100) (line-too-long)
+C:378, 0: Line too long (129/100) (line-too-long)
+C:394, 0: Line too long (149/100) (line-too-long)
+C:459, 0: Line too long (119/100) (line-too-long)
+C:468, 0: Line too long (119/100) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (itertools, random) (multiple-imports)
+C:  3, 0: Missing class docstring (missing-docstring)
+C: 12, 4: Missing method docstring (missing-docstring)
+C: 14, 4: Missing method docstring (missing-docstring)
+C: 18, 0: Missing function docstring (missing-docstring)
+C: 33, 0: Missing function docstring (missing-docstring)
+C: 34, 8: Invalid variable name "x" (invalid-name)
+W: 34, 8: Unused variable 'x' (unused-variable)
+C: 44, 0: Missing function docstring (missing-docstring)
+R: 53, 7: Too many boolean expressions in if statement (8/5) (too-many-boolean-expressions)
+C: 62, 0: Missing function docstring (missing-docstring)
+C: 85, 0: Missing function docstring (missing-docstring)
+C: 96, 0: Missing function docstring (missing-docstring)
+C:115, 0: Missing function docstring (missing-docstring)
+R:115, 0: Too many return statements (9/6) (too-many-return-statements)
+R:115, 0: Too many branches (13/12) (too-many-branches)
+C:148, 0: Missing function docstring (missing-docstring)
+W:164,32: Redefining name 'central' from outer scope (line 365) (redefined-outer-name)
+C:164, 0: Missing function docstring (missing-docstring)
+C:183, 0: Missing function docstring (missing-docstring)
+C:187,12: Invalid variable name "x" (invalid-name)
+W:187,12: Unused variable 'x' (unused-variable)
+C:195, 0: Missing function docstring (missing-docstring)
+C:197,12: Invalid variable name "x" (invalid-name)
+C:200,12: Invalid variable name "x" (invalid-name)
+W:197,12: Unused variable 'x' (unused-variable)
+C:208, 0: Missing function docstring (missing-docstring)
+W:233,-1: String statement has no effect (pointless-string-statement)
+W:241,25: Redefining name 'central' from outer scope (line 365) (redefined-outer-name)
+C:241, 0: Missing function docstring (missing-docstring)
+C:249, 0: Missing function docstring (missing-docstring)
+R:249, 0: Too many branches (15/12) (too-many-branches)
+C:292, 0: Missing function docstring (missing-docstring)
+C:306,12: Invalid variable name "highestIndex" (invalid-name)
+C:311,20: Invalid variable name "highestIndex" (invalid-name)
+C:318,28: Invalid variable name "highestIndex" (invalid-name)
+C:321,28: Invalid variable name "highestIndex" (invalid-name)
+R:296, 4: Too many nested blocks (6/5) (too-many-nested-blocks)
+R:292, 0: Too many branches (21/12) (too-many-branches)
+C:351, 0: Invalid constant name "sdc" (invalid-name)
+C:357, 0: Invalid constant name "supplement" (invalid-name)
+C:358, 0: Invalid constant name "init_cards" (invalid-name)
+C:363, 4: Invalid constant name "player_human" (invalid-name)
+C:364, 4: Invalid constant name "player_computer" (invalid-name)
+C:365, 4: Invalid constant name "central" (invalid-name)
+C:369, 4: Invalid constant name "start_game" (invalid-name)
+C:371, 8: Invalid constant name "start_game" (invalid-name)
+C:372, 4: Invalid constant name "play_game" (invalid-name)
+C:376, 8: Invalid constant name "opponent_type" (invalid-name)
+C:378,12: Invalid constant name "opponent_type" (invalid-name)
+C:379, 8: Invalid constant name "aggressive" (invalid-name)
+C:380, 8: Invalid constant name "continue_game" (invalid-name)
+C:386,12: Invalid constant name "human_round" (invalid-name)
+C:392,16: Invalid constant name "act" (invalid-name)
+C:395,20: Invalid constant name "act" (invalid-name)
+C:401,20: Invalid constant name "result" (invalid-name)
+C:407,24: Invalid constant name "out_card" (invalid-name)
+C:418,20: Invalid constant name "continue_game" (invalid-name)
+C:427,20: Invalid constant name "continue_game" (invalid-name)
+C:440,20: Invalid constant name "human_round" (invalid-name)
+C:454,12: Invalid constant name "result" (invalid-name)
+C:464,12: Invalid constant name "continue_game" (invalid-name)
+C:479,12: Invalid constant name "continue_game" (invalid-name)
+C:498, 8: Invalid constant name "start_game" (invalid-name)
+C:500,12: Invalid constant name "start_game" (invalid-name)
+C:501, 8: Invalid constant name "play_game" (invalid-name)
+
+
+Report
+======
+363 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |4      |4          |=          |50.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |15     |15         |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |404    |80.16 |404      |=          |
++----------+-------+------+---------+-----------+
+|docstring |10     |1.98  |10       |=          |
++----------+-------+------+---------+-----------+
+|comment   |56     |11.11 |56       |=          |
++----------+-------+------+---------+-----------+
+|empty     |34     |6.75  |34       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |66     |66       |=          |
++-----------+-------+---------+-----------+
+|refactor   |6      |6        |=          |
++-----------+-------+---------+-----------+
+|warning    |6      |6        |=          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |=          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++-----------------------------+------------+
+|message id                   |occurrences |
++=============================+============+
+|invalid-name                 |35          |
++-----------------------------+------------+
+|missing-docstring            |19          |
++-----------------------------+------------+
+|line-too-long                |11          |
++-----------------------------+------------+
+|unused-variable              |3           |
++-----------------------------+------------+
+|too-many-branches            |3           |
++-----------------------------+------------+
+|redefined-outer-name         |2           |
++-----------------------------+------------+
+|too-many-return-statements   |1           |
++-----------------------------+------------+
+|too-many-nested-blocks       |1           |
++-----------------------------+------------+
+|too-many-boolean-expressions |1           |
++-----------------------------+------------+
+|pointless-string-statement   |1           |
++-----------------------------+------------+
+|multiple-imports             |1           |
++-----------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 7.85/10 (previous run: 7.85/10, +0.00)
+

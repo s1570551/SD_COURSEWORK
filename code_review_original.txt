@@ -1,0 +1,408 @@
+************* Module dbc_original
+C: 10, 0: Line too long (128/100) (line-too-long)
+W: 10, 0: Bad indentation. Found 16 spaces, expected 8 (bad-indentation)
+W: 14, 0: Bad indentation. Found 12 spaces, expected 8 (bad-indentation)
+C: 18, 0: Line too long (104/100) (line-too-long)
+C: 19, 0: Wrong continued indentation (remove 7 spaces).
+                 'discard': None}
+          |      ^ (bad-continuation)
+C: 20, 0: Line too long (109/100) (line-too-long)
+C: 21, 0: Wrong continued indentation (remove 5 spaces).
+               'discard': None}
+          |    ^ (bad-continuation)
+C: 23, 0: Line too long (411/100) (line-too-long)
+C: 23, 0: Exactly one space required after comma
+    sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+                                                                                                                                               ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+    sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+                                                                                                                                                                               ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+    sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+                                                                                                                                                                                                                    ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+    sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+                                                                                                                                                                                                                                                      ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+    sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+                                                                                                                                                                                                                                                                                    ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+    sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+                                                                                                                                                                                                                                                                                                                   ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+    sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], 3 * [Card('Swordsman', (4, 0), 3)], 2 * [Card('Knight', (6, 0), 5)],3 * [Card('Tailor', (0, 4), 3)],3 * [Card('Crossbowman', (4, 0), 3)],3 * [Card('Merchant', (0, 5), 4)],4 * [Card('Thug', (2, 0), 1)],4 * [Card('Thief', (1, 1), 1)],2 * [Card('Catapault', (7, 0), 6)], 2 * [Card('Caravan', (1, 5), 5)],2 * [Card('Assassin', (5, 0), 4)]]
+                                                                                                                                                                                                                                                                                                                                                                                        ^ (bad-whitespace)
+C: 26, 0: Wrong continued indentation (remove 1 space).
+                     ]
+                    |^ (bad-continuation)
+C: 33, 0: Wrong hanging indentation (remove 4 spaces).
+            8 * [Card('Serf', (0, 1), 0)],
+        |   ^ (bad-continuation)
+C: 57, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C: 83, 0: Exactly one space required around comparison
+    cG = (pG=='Y')
+            ^^ (bad-whitespace)
+C: 85, 0: Exactly one space required around comparison
+    aggressive = (oT=='A')
+                    ^^ (bad-whitespace)
+W: 97, 0: Bad indentation. Found 20 spaces, expected 16 (bad-indentation)
+W: 98, 0: Bad indentation. Found 20 spaces, expected 16 (bad-indentation)
+C:101, 0: Line too long (115/100) (line-too-long)
+C:106, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:106, 0: Exactly one space required around comparison
+                if(len(pO['hand'])>0):
+                                  ^ (bad-whitespace)
+C:125, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:125, 0: No space allowed after bracket
+                if( int(act) < len(pO['hand'])):
+                  ^ (bad-whitespace)
+C:141, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:148, 0: Exactly one space required after comma
+                        print "[%s] %s" % (ind,card)
+                                              ^ (bad-whitespace)
+W:164, 0: Unnecessary semicolon (unnecessary-semicolon)
+W:167, 0: Bad indentation. Found 29 spaces, expected 28 (bad-indentation)
+C:170, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:170, 0: No space allowed after bracket
+                                if( len(central['deck']) > 0):
+                                  ^ (bad-whitespace)
+W:176, 0: Bad indentation. Found 29 spaces, expected 28 (bad-indentation)
+W:179, 0: Bad indentation. Found 29 spaces, expected 28 (bad-indentation)
+C:188, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:188, 0: Exactly one space required after comparison
+                if (len(pO['hand']) >0 ):
+                                    ^ (bad-whitespace)
+C:188, 0: No space allowed before bracket
+                if (len(pO['hand']) >0 ):
+                                       ^ (bad-whitespace)
+C:193, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:193, 0: Exactly one space required after comparison
+                if (len(pO['active']) >0 ):
+                                      ^ (bad-whitespace)
+C:193, 0: No space allowed before bracket
+                if (len(pO['active']) >0 ):
+                                         ^ (bad-whitespace)
+W:219, 0: Bad indentation. Found 24 spaces, expected 12 (bad-indentation)
+W:220, 0: Bad indentation. Found 24 spaces, expected 12 (bad-indentation)
+W:221, 0: Bad indentation. Found 24 spaces, expected 12 (bad-indentation)
+W:222, 0: Bad indentation. Found 24 spaces, expected 12 (bad-indentation)
+C:241, 0: No space allowed before bracket
+                for intindex in range (0, central['activeSize']):
+                                      ^ (bad-whitespace)
+C:244, 0: Exactly one space required after comparison
+                if len(templist) >0:
+                                 ^ (bad-whitespace)
+C:246, 0: Exactly one space required after comma
+                    for intindex in range(0,len(templist)):
+                                           ^ (bad-whitespace)
+C:251, 0: Line too long (110/100) (line-too-long)
+C:251, 0: Exactly one space required after comparison
+                                if templist[intindex][1].get_attack() >templist[highestIndex][1].get_attack():
+                                                                      ^ (bad-whitespace)
+C:254, 0: Line too long (109/100) (line-too-long)
+C:254, 0: Exactly one space required after comparison
+                                if templist[intindex][1].get_attack() >templist[highestIndex][1].get_money():
+                                                                      ^ (bad-whitespace)
+C:257, 0: Exactly one space required after comma
+                    if source in range(0,5):
+                                        ^ (bad-whitespace)
+C:263, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:263, 0: No space allowed after bracket
+                            if( len(central['deck']) > 0):
+                              ^ (bad-whitespace)
+C:285, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:285, 0: Exactly one space required after comparison
+        if (len(pC['hand']) >0 ):
+                            ^ (bad-whitespace)
+C:285, 0: No space allowed before bracket
+        if (len(pC['hand']) >0 ):
+                               ^ (bad-whitespace)
+C:288, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C:288, 0: Exactly one space required after comparison
+        if (len(pC['active']) >0 ):
+                              ^ (bad-whitespace)
+C:288, 0: No space allowed before bracket
+        if (len(pC['active']) >0 ):
+                                 ^ (bad-whitespace)
+W:292, 0: Bad indentation. Found 20 spaces, expected 12 (bad-indentation)
+W:293, 0: Bad indentation. Found 24 spaces, expected 16 (bad-indentation)
+W:294, 0: Bad indentation. Found 24 spaces, expected 16 (bad-indentation)
+W:295, 0: Bad indentation. Found 24 spaces, expected 16 (bad-indentation)
+W:296, 0: Bad indentation. Found 20 spaces, expected 12 (bad-indentation)
+W:297, 0: Bad indentation. Found 20 spaces, expected 12 (bad-indentation)
+C:336, 0: Exactly one space required around comparison
+            cG = (pG=='Y')
+                    ^^ (bad-whitespace)
+C:338, 0: Line too long (103/100) (line-too-long)
+C:339, 0: Exactly one space required around comparison
+                aggressive = (oT=='A')
+                                ^^ (bad-whitespace)
+C:340, 0: Line too long (101/100) (line-too-long)
+C:341, 0: Wrong continued indentation (remove 7 spaces).
+                             'handsize': 5,
+                      |      ^ (bad-continuation)
+C:342, 0: Wrong continued indentation (remove 7 spaces).
+                             'discard': None}
+                      |      ^ (bad-continuation)
+C:343, 0: Line too long (121/100) (line-too-long)
+C:344, 0: Wrong continued indentation (remove 6 spaces).
+                            'discard': None}
+                      |     ^ (bad-continuation)
+C:345, 0: Line too long (112/100) (line-too-long)
+C:347, 0: Wrong hanging indentation (remove 12 spaces).
+                                4 * [Card('Archer', (3, 0), 2)],
+                    |           ^ (bad-continuation)
+C:348, 0: Wrong hanging indentation (remove 12 spaces).
+                                4 * [Card('Baker', (0, 3), 2)],
+                    |           ^ (bad-continuation)
+C:349, 0: Wrong hanging indentation (remove 12 spaces).
+                                3 * [Card('Swordsman', (4, 0), 3)],
+                    |           ^ (bad-continuation)
+C:350, 0: Wrong hanging indentation (remove 12 spaces).
+                                2 * [Card('Knight', (6, 0), 5)],
+                    |           ^ (bad-continuation)
+C:351, 0: Wrong hanging indentation (remove 12 spaces).
+                                3 * [Card('Tailor', (0, 4), 3)],
+                    |           ^ (bad-continuation)
+C:352, 0: Wrong hanging indentation (remove 12 spaces).
+                                3 * [Card('Crossbowman', (4, 0), 3)],
+                    |           ^ (bad-continuation)
+C:353, 0: Wrong hanging indentation (remove 12 spaces).
+                                3 * [Card('Merchant', (0, 5), 4)],
+                    |           ^ (bad-continuation)
+C:354, 0: Wrong hanging indentation (remove 12 spaces).
+                                4 * [Card('Thug', (2, 0), 1)],
+                    |           ^ (bad-continuation)
+C:355, 0: Wrong hanging indentation (remove 12 spaces).
+                                4 * [Card('Thief', (1, 1), 1)],
+                    |           ^ (bad-continuation)
+C:356, 0: Wrong hanging indentation (remove 12 spaces).
+                                2 * [Card('Catapault', (7, 0), 6)],
+                    |           ^ (bad-continuation)
+C:357, 0: Wrong hanging indentation (remove 12 spaces).
+                                2 * [Card('Caravan', (1, 5), 5)],
+                    |           ^ (bad-continuation)
+C:358, 0: Wrong hanging indentation (remove 12 spaces).
+                                2 * [Card('Assassin', (5, 0), 4)]
+                    |           ^ (bad-continuation)
+C:359, 0: Wrong hanging indentation.
+                            ]
+                |   |       ^ (bad-continuation)
+C:362, 0: Wrong continued indentation (add 4 spaces).
+                            ]
+                            ^   | (bad-continuation)
+C:369, 0: Wrong hanging indentation (remove 8 spaces).
+                            8 * [Card('Serf', (0, 1), 0)],
+                    |       ^ (bad-continuation)
+C:370, 0: Wrong hanging indentation (remove 8 spaces).
+                            2 * [Card('Squire', (1, 0), 0)]
+                    |       ^ (bad-continuation)
+W: 49, 4: Redefining built-in 'max' (redefined-builtin)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (itertools, random) (multiple-imports)
+C:  3, 0: Missing class docstring (missing-docstring)
+C: 11, 4: Missing method docstring (missing-docstring)
+C: 13, 4: Missing method docstring (missing-docstring)
+C: 18, 4: Invalid constant name "pO" (invalid-name)
+C: 20, 4: Invalid constant name "pC" (invalid-name)
+C: 22, 4: Invalid constant name "central" (invalid-name)
+C: 23, 4: Invalid constant name "sdc" (invalid-name)
+C: 24, 4: Invalid constant name "playeronedeck" (invalid-name)
+C: 27, 4: Invalid constant name "pod" (invalid-name)
+C: 32, 4: Invalid constant name "playertwodeck" (invalid-name)
+C: 36, 4: Invalid constant name "ptd" (invalid-name)
+C: 42, 4: Invalid constant name "supplement" (invalid-name)
+C: 43, 4: Invalid constant name "deck" (invalid-name)
+C: 49, 4: Invalid constant name "max" (invalid-name)
+C: 50, 4: Invalid constant name "count" (invalid-name)
+C: 52, 8: Invalid constant name "card" (invalid-name)
+C: 54, 8: Invalid constant name "count" (invalid-name)
+E: 73,16: Non-iterable value central['active'] is used in an iterating context (not-an-iterable)
+E: 78,14: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+C: 82, 4: Invalid constant name "pG" (invalid-name)
+C: 83, 4: Invalid constant name "cG" (invalid-name)
+C: 84, 4: Invalid constant name "oT" (invalid-name)
+C: 85, 4: Invalid constant name "aggressive" (invalid-name)
+C: 87, 8: Invalid constant name "money" (invalid-name)
+C: 88, 8: Invalid constant name "attack" (invalid-name)
+C: 95,12: Invalid constant name "index" (invalid-name)
+E: 96,24: Non-iterable value pO['hand'] is used in an iterating context (not-an-iterable)
+C:103,12: Invalid constant name "act" (invalid-name)
+C:114,16: Invalid constant name "index" (invalid-name)
+E:115,28: Non-iterable value pO['hand'] is used in an iterating context (not-an-iterable)
+E:120,28: Non-iterable value pO['active'] is used in an iterating context (not-an-iterable)
+E:127,32: Non-iterable value pO['active'] is used in an iterating context (not-an-iterable)
+C:131,16: Invalid constant name "index" (invalid-name)
+E:132,28: Non-iterable value pO['hand'] is used in an iterating context (not-an-iterable)
+E:137,28: Non-iterable value pO['active'] is used in an iterating context (not-an-iterable)
+C:143,16: Invalid constant name "notending" (invalid-name)
+C:146,20: Invalid constant name "ind" (invalid-name)
+E:147,32: Non-iterable value central['active'] is used in an iterating context (not-an-iterable)
+C:151,20: Invalid constant name "bv" (invalid-name)
+E:154,40: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+C:155,32: Invalid constant name "money" (invalid-name)
+E:155,48: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+C:163,24: Invalid constant name "notending" (invalid-name)
+E:167,41: Value 'central['active']' is unsubscriptable (unsubscriptable-object)
+C:168,32: Invalid constant name "money" (invalid-name)
+E:168,48: Value 'central['active']' is unsubscriptable (unsubscriptable-object)
+C:171,36: Invalid constant name "card" (invalid-name)
+C:186,16: Invalid constant name "attack" (invalid-name)
+E:206,20: Non-iterable value central['active'] is used in an iterating context (not-an-iterable)
+E:211,18: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+C:216, 8: Invalid constant name "money" (invalid-name)
+C:217, 8: Invalid constant name "attack" (invalid-name)
+C:227, 8: Invalid constant name "attack" (invalid-name)
+C:233,12: Invalid constant name "cb" (invalid-name)
+C:234,12: Invalid constant name "templist" (invalid-name)
+C:237,16: Invalid constant name "templist" (invalid-name)
+E:239,23: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+E:240,46: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+E:242,23: Value 'central['active']' is unsubscriptable (unsubscriptable-object)
+E:243,51: Value 'central['active']' is unsubscriptable (unsubscriptable-object)
+C:245,20: Invalid constant name "highestIndex" (invalid-name)
+C:256,20: Invalid constant name "source" (invalid-name)
+E:258,36: Value 'central['active']' is unsubscriptable (unsubscriptable-object)
+C:259,28: Invalid constant name "money" (invalid-name)
+E:259,44: Value 'central['active']' is unsubscriptable (unsubscriptable-object)
+C:260,28: Invalid constant name "card" (invalid-name)
+C:264,32: Invalid constant name "card" (invalid-name)
+E:271,36: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+C:272,28: Invalid constant name "money" (invalid-name)
+E:272,44: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+C:273,28: Invalid constant name "card" (invalid-name)
+C:279,20: Invalid constant name "cb" (invalid-name)
+C:281,20: Invalid constant name "cb" (invalid-name)
+E:302,20: Non-iterable value central['active'] is used in an iterating context (not-an-iterable)
+E:307,18: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+C:313,12: Invalid constant name "cG" (invalid-name)
+C:316,12: Invalid constant name "cG" (invalid-name)
+C:325,16: Invalid constant name "pHT" (invalid-name)
+C:326,16: Invalid constant name "pCT" (invalid-name)
+C:333,12: Invalid constant name "cG" (invalid-name)
+C:335,12: Invalid constant name "pG" (invalid-name)
+C:336,12: Invalid constant name "cG" (invalid-name)
+C:338,16: Invalid constant name "oT" (invalid-name)
+C:339,16: Invalid constant name "aggressive" (invalid-name)
+C:340,16: Invalid constant name "pO" (invalid-name)
+C:343,16: Invalid constant name "pC" (invalid-name)
+C:345,16: Invalid constant name "central" (invalid-name)
+C:346,16: Invalid constant name "sdc" (invalid-name)
+C:360,16: Invalid constant name "playeronedeck" (invalid-name)
+C:363,16: Invalid constant name "pod" (invalid-name)
+C:368,16: Invalid constant name "playertwodeck" (invalid-name)
+C:372,16: Invalid constant name "ptd" (invalid-name)
+C:378,16: Invalid constant name "supplement" (invalid-name)
+C:379,16: Invalid constant name "deck" (invalid-name)
+C:407,16: Invalid constant name "max" (invalid-name)
+C:408,16: Invalid constant name "count" (invalid-name)
+E:410,26: Value 'central['active']' is unsubscriptable (unsubscriptable-object)
+C:411,20: Invalid constant name "count" (invalid-name)
+E:415,26: Value 'central['supplement']' is unsubscriptable (unsubscriptable-object)
+
+
+Report
+======
+332 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |4      |4          |=          |50.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |371    |88.97 |371      |=          |
++----------+-------+------+---------+-----------+
+|docstring |5      |1.20  |5        |=          |
++----------+-------+------+---------+-----------+
+|comment   |0      |0.00  |0        |=          |
++----------+-------+------+---------+-----------+
+|empty     |41     |9.83  |41       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |148    |148      |=          |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |=          |
++-----------+-------+---------+-----------+
+|warning    |19     |19       |=          |
++-----------+-------+---------+-----------+
+|error      |27     |27       |=          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++-----------------------+------------+
+|message id             |occurrences |
++=======================+============+
+|invalid-name           |69          |
++-----------------------+------------+
+|bad-whitespace         |30          |
++-----------------------+------------+
+|bad-continuation       |23          |
++-----------------------+------------+
+|unsubscriptable-object |17          |
++-----------------------+------------+
+|bad-indentation        |17          |
++-----------------------+------------+
+|line-too-long          |11          |
++-----------------------+------------+
+|superfluous-parens     |10          |
++-----------------------+------------+
+|not-an-iterable        |10          |
++-----------------------+------------+
+|missing-docstring      |4           |
++-----------------------+------------+
+|unnecessary-semicolon  |1           |
++-----------------------+------------+
+|redefined-builtin      |1           |
++-----------------------+------------+
+|multiple-imports       |1           |
++-----------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 0.90/10 (previous run: 0.90/10, +0.00)
+
