@@ -39,6 +39,7 @@ def draw_cards(player):
         card = player['deck'].pop()
         player['hand'].append(card)
 
+
 # This function is used to initialize player information
 def init_player_info(player):
     player['health'] = 30
@@ -86,6 +87,10 @@ def show_cards(card_list):
     for card in card_list:
         print "[%s] %s " % (index, card)
         index = index + 1
+    if index == len(card_list):
+        return 0
+    else:
+        return 1
 
 # This function, containing many function calls, is used to initialize a new game.
 def init_new_game():
@@ -144,26 +149,35 @@ def display_main_information(player1, player2):
     print "Player Health %s" % player1['health']
     print "Computer Health %s" % player2['health']
     print "\nYour Hand:"
-    show_cards(player1['hand'])
+    if show_cards(player1['hand']):
+        print "fail to load your hand cards"
+        return 1
     print "\nYour Active Cards"
-    show_cards(player1['active'])
+    if show_cards(player1['active']):
+        print "fail to load your active cards"
+        return 1
     print "\nYour money %s \nYour attack %s\n" % (player1['money'], player1['attack'])
     print "Choose Action: (V = View available cards, P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
+    return 0
 
 # This function is used when the purchase of supplement occurs
 def purchase_supplement(player):
     if len(central['supplement']) > 0:
+        original_discard_length = len(player['discard'])
         if player['money'] >= central['supplement'][0].cost:
             player['money'] = player['money'] - central['supplement'][0].cost
             player['discard'].append(central['supplement'].pop())
-            print "Supplement Bought"
-            return 0
+            if len(player['discard']) == original_discard_length + 1:
+                print "Supplement Bought"
+                return 0
+            else:
+                return 1
         else:
             print "insufficient money to buy"
-            return 1
+            return 0
     else:
         print "no supplements left"
-        return 2
+        return 0
 
 # This function is used to play all cards in hands. This is used by computer by default
 def play_all_cards(player):
@@ -185,6 +199,10 @@ def discard_cards(player):
     if len(player['active']) > 0:
         for x in range(0, len(player['active'])):
             player['discard'].append(player['active'].pop())
+    if len(player['active']) > 0 or len(player['hand']) > 0:
+        return 1
+    else:
+        return 0
 
 # This function is called to decide whethe the game is finished
 def  will_continue():
@@ -234,11 +252,14 @@ def human_purchase():
             print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
             purchase_option = raw_input("Choose option: ")
         if purchase_option == 'S' or purchase_option == 's':
-            purchase_supplement(player_human)
+            if purchase_supplement(player_human):
+                print "purchase supplement failed"
+                return 1
         elif purchase_option == 'E' or purchase_option == 'e':
-            break
+            return 0
         elif purchase_option.isdigit():
             if int(purchase_option) < len(central['active']):
+                original_discard_length = len(player_human['discard'])
                 if player_human['money'] >= central['active'][int(purchase_option)].cost:
                     player_human['money'] = player_human['money'] - central['active'][int(purchase_option)].cost
                     player_human['discard'].append(central['active'].pop(int(purchase_option)))
@@ -247,7 +268,11 @@ def human_purchase():
                         central['active'].append(card)
                     else:
                         central['activeSize'] = central['activeSize'] - 1
-                    print "Card bought"
+                    if len(player_human['discard']) == original_discard_length + 1:
+                        print "Card bought %s" % card
+                    else:
+                        print "card purchase failed"
+                        return 1
                 else:
                     print "Insufficient money to buy\n"
             else:
@@ -280,10 +305,16 @@ def computer_purchase():
             source = templist[highestIndex][0]
             if source in range(0, 5):
                 if player_computer['money'] >= central['active'][int(source)].cost:
+                    original_discard_length = len(player_computer['discard'])
                     player_computer['money'] = player_computer['money'] - central['active'][int(source)].cost
                     card = central['active'].pop(int(source))
-                    print "Card bought %s" % card
                     player_computer['discard'].append(card)
+                    if len(player_computer['discard']) == original_discard_length + 1:
+                        print "Card bought %s" % card
+                    else:
+                        print "card purchase failed"
+                        return 1
+                    
                     if len(central['deck']) > 0:
                         card = central['deck'].pop()
                         central['active'].append(card)
@@ -295,6 +326,7 @@ def computer_purchase():
                 purchase_supplement(player_computer)
         else:
             computer_purcase = False
+            return 0
 
 # Card list should be consistent and can be modified here
 sdc = [4 * [Card('Archer', (3, 0), 2)], 4 * [Card('Baker', (0, 3), 2)], \
@@ -335,7 +367,9 @@ if __name__ == '__main__':
 
             while True:
 
-                display_main_information(player_human, player_computer)
+                if display_main_information(player_human, player_computer):
+                    print "Error occurs when displaying cards"
+                    exit(-1)
 
                 act = raw_input("Enter Action: ")
                 while input_check(act, 3):
@@ -359,11 +393,14 @@ if __name__ == '__main__':
                         print "Invalid index! Please enter a valid index number\n"
 
                 if act == 'B' or act == 'b':
-                    human_purchase()
+                    if human_purchase():
+                        exit(-1)
 
                 if act == 'A' or act == 'a':
                     player_computer['health'] = player_computer['health'] - player_human['attack']
                     player_human['attack'] = 0
+                    print "\nPlayer Health %s" % player_human['health']
+                    print "Computer Health %s" % player_computer['health']
                     continue_game = will_continue()
                     if(continue_game is False):
                         break
@@ -371,7 +408,9 @@ if __name__ == '__main__':
                 if act == 'E'  or act == 'e':
                     player_human['money'] = 0
                     player_human['attack'] = 0
-                    discard_cards(player_human)
+                    if discard_cards(player_human):
+                        print "discard process error"
+                        exit(-1)
                     draw_cards(player_human)
                     print "\n*****Computer's turn started*****\n"
                     break
@@ -398,18 +437,22 @@ if __name__ == '__main__':
             continue_game = will_continue()
             if(continue_game is False):
                 break
-            
+
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
 
             if player_computer['money'] > 0:
                 print "Computer buying"
-                computer_purchase()
+                if computer_purchase():
+                    print "computer purchase failed"
+                    exit(-1)
 
             else:
                 print "No Money to buy anything"
             player_computer['attack'] = 0
             player_computer['money'] = 0
-            discard_cards(player_computer)
+            if discard_cards(player_computer):
+                print "discard process error"
+                exit(-1)
             draw_cards(player_computer)
             print "\n*****Computer's turn finished*****"
 
