@@ -44,15 +44,15 @@ def draw_cards(player):
 def init_player_info(player):
     player['health'] = 30
     player['handsize'] = 5
-    player['deck'] = None
-    player['hand'] = None
-    player['active'] = None
-    player['discard'] = None
+    player['deck'] = []
+    player['hand'] = []
+    player['active'] = []
+    player['discard'] = []
     player['money'] = 0
     player['attack'] = 0
     if player['health'] == 30 and player['handsize'] == 5 and\
-    player['deck'] == None and player['hand'] == None and\
-    player['active'] == None and player['discard'] == None and\
+    player['deck'] == [] and player['hand'] == [] and\
+    player['active'] == [] and player['discard'] == [] and\
     player['money'] == 0 and player['attack'] == 0:
         return 0
     else:
@@ -93,7 +93,7 @@ def show_cards(card_list):
         return 1
 
 # This function, containing many function calls, is used to initialize a new game.
-def init_new_game():
+def init_new_game(player_human, player_computer, central):
     if init_player_info(player_human) or init_player_info(player_computer):
         print "Players fail to initialized"
         return 1
@@ -103,7 +103,7 @@ def init_new_game():
     if init_central_deck(central):
         print "central deck fail to initialized"
         return 1
-    show_available_cards()
+    show_available_cards(central)
     return 0
 
 # This is a input checker used to check whether the input value is valid
@@ -161,7 +161,7 @@ def display_main_information(player1, player2):
     return 0
 
 # This function is used when the purchase of supplement occurs
-def purchase_supplement(player):
+def purchase_supplement(player, central):
     if len(central['supplement']) > 0:
         original_discard_length = len(player['discard'])
         if player['money'] >= central['supplement'][0].cost:
@@ -205,7 +205,7 @@ def discard_cards(player):
         return 0
 
 # This function is called to decide whethe the game is finished
-def  will_continue():
+def  will_continue(player_human, player_computer, central):
     if player_human['health'] <= 0:
         print "Computer wins"
         return False
@@ -231,7 +231,7 @@ def  will_continue():
     else:
         return True
 
-def show_available_cards():
+def show_available_cards(central):
     print "Available Cards"
     show_cards(central['active'])
     print "Supplement"
@@ -252,7 +252,7 @@ def human_purchase():
             print "\nChoose a card to buy [0-n], S for supplement, E to end buying"
             purchase_option = raw_input("Choose option: ")
         if purchase_option == 'S' or purchase_option == 's':
-            if purchase_supplement(player_human):
+            if purchase_supplement(player_human, central):
                 print "purchase supplement failed"
                 return 1
         elif purchase_option == 'E' or purchase_option == 'e':
@@ -323,7 +323,7 @@ def computer_purchase():
                 else:
                     print "Error Occurred"
             else:
-                purchase_supplement(player_computer)
+                purchase_supplement(player_computer, central)
         else:
             computer_purcase = False
             return 0
@@ -345,12 +345,12 @@ if __name__ == '__main__':
     player_computer = {'name':'player computer'}
     central = {}
 
-    if init_new_game() == -1:
+    if init_new_game(player_human, player_computer, central):
         exit(-1)
-    pG = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
-    while input_check(pG, 1):
-        pG = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
-    play_game = (pG == 'Y' or pG == 'y')
+    start_game = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
+    while input_check(start_game, 1):
+        start_game = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
+    play_game = (start_game == 'Y' or start_game == 'y')
     while play_game:
         draw_cards(player_human)
         draw_cards(player_computer)
@@ -361,7 +361,7 @@ if __name__ == '__main__':
         continue_game = True
         print "\n\n==============================================\n\n"
         print "Game starts!!!\n"
-        show_available_cards()
+        show_available_cards(central)
 
         while continue_game:
             human_round = True
@@ -376,7 +376,7 @@ if __name__ == '__main__':
                     print "\nChoose Action: (V = View available cards, P = play all, [0-n] = play that card, B = Buy Card, A = Attack, E = end turn)"
                     act = raw_input("Enter Action: ")
                 if act == 'V' or act == 'v':
-                    show_available_cards()
+                    show_available_cards(central)
 
                 if act == 'P' or act == 'p':
                     result = play_all_cards(player_human)
@@ -401,7 +401,7 @@ if __name__ == '__main__':
                     player_human['attack'] = 0
                     print "\nPlayer Health %s" % player_human['health']
                     print "Computer Health %s" % player_computer['health']
-                    continue_game = will_continue()
+                    continue_game = will_continue(player_human, player_computer, central)
                     if continue_game is False:
                         break
 
@@ -418,7 +418,7 @@ if __name__ == '__main__':
             if continue_game is False:
                 break
 
-            show_available_cards()
+            show_available_cards(central)
 
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
@@ -434,7 +434,7 @@ if __name__ == '__main__':
 
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
-            continue_game = will_continue()
+            continue_game = will_continue(player_human, player_computer, central)
             if continue_game is False:
                 break
 
@@ -457,10 +457,12 @@ if __name__ == '__main__':
             print "\n*****Computer's turn finished*****"
 
         print "\n\n==============================================\n\n"
-        init_new_game()
-        pG = raw_input("\nDo you want to play another game?:")
-        while input_check(pG, 1):
-            pG = raw_input('Do you want to play a game?:')
-        play_game = (pG == 'Y' or pG == 'y')
+        if init_new_game(player_human, player_computer, central):
+            exit(-1)
+
+        start_game = raw_input("\nDo you want to play another game?:")
+        while input_check(start_game, 1):
+            start_game = raw_input('Do you want to play a game?:')
+        play_game = (start_game == 'Y' or start_game == 'y')
 
     exit()
