@@ -23,6 +23,11 @@ def init_player_decks(player):
     player['hand'] = []
     player['discard'] = []
     player['active'] = []
+    if player['deck'] == init_deck and player['hand'] == [] and\
+    player['discard'] == [] and player['active'] == []:
+        return 0
+    else:
+        return 1
 
 # This function is used to drae cards from deck to hand.
 def draw_cards(player):
@@ -44,6 +49,13 @@ def init_player_info(player):
     player['discard'] = None
     player['money'] = 0
     player['attack'] = 0
+    if player['health'] == 30 and player['handsize'] == 5 and\
+    player['deck'] == None and player['hand'] == None and\
+    player['active'] == None and player['discard'] == None and\
+    player['money'] == 0 and player['attack'] == 0:
+        return 0
+    else:
+        return 1
 
 # This function is used to initialize central deck
 def init_central_deck(central_deck):
@@ -52,7 +64,8 @@ def init_central_deck(central_deck):
     deck = list(itertools.chain.from_iterable(sdc))
     random.shuffle(deck)
     central['deck'] = deck
-    central['supplement'] = list(itertools.chain.from_iterable(supplement))
+    sup = list(itertools.chain.from_iterable(supplement))
+    central['supplement'] = sup
     central['active'] = []
     max = central['activeSize']
     count = 0
@@ -60,6 +73,12 @@ def init_central_deck(central_deck):
         card = central['deck'].pop()
         central['active'].append(card)
         count = count + 1
+    if central['name'] == 'central' and central['activeSize'] == 5 and\
+    central['active'] != [] and central['deck'] == deck and\
+    central['supplement'] == sup:
+        return 0
+    else:
+        return 1
 
 # This function is used to print all cards in the list
 def show_cards(card_list):
@@ -70,15 +89,17 @@ def show_cards(card_list):
 
 # This function, containing many function calls, is used to initialize a new game.
 def init_new_game():
-    init_player_info(player_human)
-    init_player_info(player_computer)
-    init_player_decks(player_human)
-    init_player_decks(player_computer)
-    init_central_deck(central)
-    print "\nAvailable Cards"
-    show_cards(central['active'])
-    print "\nSupplement"
-    print central['supplement'][0]
+    if init_player_info(player_human) or init_player_info(player_computer):
+        print "Players fail to initialized"
+        return -1
+    if init_player_decks(player_human) or init_player_decks(player_computer):
+        print "Players' deck fail to initialized"
+        return -1
+    if init_central_deck(central):
+        print "central deck fail to initialized"
+        return -1
+    show_available_cards()
+    return 0
 
 # This is a input checker used to check whether the input value is valid
 # check_type:
@@ -136,19 +157,25 @@ def purchase_supplement(player):
             player['money'] = player['money'] - central['supplement'][0].cost
             player['discard'].append(central['supplement'].pop())
             print "Supplement Bought"
+            return 0
         else:
             print "insufficient money to buy"
+            return 1
     else:
         print "no supplements left"
+        return 2
 
 # This function is used to play all cards in hands. This is used by computer by default
 def play_all_cards(player):
+    money = 0
+    attack = 0
     if len(player['hand']) > 0:
         for x in range(0, len(player['hand'])):
             card = player['hand'].pop()
             player['active'].append(card)
-            player['money'] = player['money'] + card.get_money()
-            player['attack'] = player['attack'] + card.get_attack()
+            money = money + card.get_money()
+            attack = attack + card.get_attack()
+    return [money,attack]
 
 # This function put all remaining cards in hand and all cards in active area into discarded pile
 def discard_cards(player):
@@ -286,7 +313,8 @@ if __name__ == '__main__':
     player_computer = {'name':'player computer'}
     central = {}
 
-    init_new_game()
+    if init_new_game() == -1:
+        exit(-1)
     pG = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
     while input_check(pG, 1):
         pG = raw_input('\nDo you want to play a game?\nY = Yes , N = No: ')
@@ -317,7 +345,9 @@ if __name__ == '__main__':
                     show_available_cards()
 
                 if act == 'P' or act == 'p':
-                    play_all_cards(player_human)
+                    result = play_all_cards(player_human)
+                    player_human['money'] = player_human['money'] + int(result[0])
+                    player_human['attack'] = player_human['attack'] + int(result[1])
 
                 if act.isdigit():
                     if int(act) < len(player_human['hand']):
@@ -354,16 +384,21 @@ if __name__ == '__main__':
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
 
-            play_all_cards(player_computer)
+            result = play_all_cards(player_computer)
+            player_computer['money'] = player_computer['money'] + int(result[0])
+            player_computer['attack'] = player_computer['attack'] + int(result[1])
 
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
             print " Computer attacking with strength %s" % player_computer['attack']
             player_human['health'] = player_human['health'] - player_computer['attack']
-            if(continue_game is False):
-                break
+
 
             print "\nPlayer Health %s" % player_human['health']
             print "Computer Health %s" % player_computer['health']
+            continue_game = will_continue()
+            if(continue_game is False):
+                break
+            
             print " Computer player values money %s, attack %s" % (player_computer['money'], player_computer['attack'])
 
             if player_computer['money'] > 0:
